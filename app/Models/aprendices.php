@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class aprendices extends Model
 {
-//HI!
+//HI!!!!!!!!!
     use HasFactory;
     protected $table = 'tblaprendices';
 

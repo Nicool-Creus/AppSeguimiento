@@ -9,6 +9,13 @@
     <title>INDEX</title>
 </head>
 <body>
+
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
 <h1 style="text-align: center;">Programas de formación</h1>
 
 <table class="table table-bordered table-hover">
@@ -26,6 +33,22 @@
             <td>{{$programas->Codigo}}</td>
             <td>{{$programas->Denominacion}}</td>
             <td>{{$programas->Observaciones}}</td>
+
+            <td class="text-center">
+
+                <a href="{{ route('programas.show', $programas->NIS) }}"
+                   class="btn btn-info btn-sm">Consultar</a>
+
+                <a href="{{ route('programas.edit', $programas->NIS) }}"
+                   class="btn btn-info btn-sm">Actualizar</a>
+
+                <form action="{{ route('programas.destroy', $programas->NIS) }}"
+                      method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de querer eliminar este registro?')">Eliminar</button>
+                </form>
+            </td>
         </tr>
     @endforeach
 

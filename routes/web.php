@@ -1,12 +1,5 @@
 <?php
 
-use App\Http\Controllers\CentrosDeFormacionController;
-use App\Http\Controllers\EnteCoformadorController;
-use App\Http\Controllers\EpsController;
-use App\Http\Controllers\FichasDeCaracterizacionController;
-use App\Http\Controllers\RegionalesController;
-use App\Http\Controllers\RolesAdministrativosController;
-use App\Http\Controllers\TiposDocumentosController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -24,23 +17,14 @@ require __DIR__.'/settings.php';
 
 
 
-
-Route::get('regionales', [RegionalesController::class, 'index'])->name('regionales.index.blade');
-
-Route::get('tipos-documentos', [TiposDocumentosController::class, 'index'])->name('tiposDocumentos.index.blade');
-
-Route::get('roles-administrativos', [RolesAdministrativosController::class, 'index'])->name('rolesAdministrativos.index.blade');
-
-Route::get('eps', [EpsController::class, 'index'])->name('eps.index.blade');
-
-Route::get('ente-coformador', [EnteCoformadorController::class, 'index'])->name('enteCoformador.index.blade');
-
-Route::get('centros-de-formacion', [CentrosDeFormacionController::class, 'index'])->name('centrosDeFormacion.index.blade');
-
-Route::get('fichas-de-caracterizacion', [FichasDeCaracterizacionController::class, 'index'])->name('fichasDeCaracterizacion.index.blade');
-
-
-route::resource('programas-de-formacion', \App\Http\Controllers\ProgramasDeFormacionController::class);
+route::resource('programas', \App\Http\Controllers\ProgramasDeFormacionController::class);
+route::resource('eps',\App\Http\Controllers\EpsController::class);
+route::resource('regionales',\App\Http\Controllers\RegionalesController::class);
+route::resource('tiposDocumentos',\App\Http\Controllers\TiposDocumentosController::class);
+route::resource('rolesAdministrativos',\App\Http\Controllers\RolesAdministrativosController::class);
+route::resource('enteCoformador',\App\Http\Controllers\EnteCoformadorController::class);
+route::resource('centrosFormacion',\App\Http\Controllers\ProgramasDeFormacionController::class);
+route::resource('fichasCaracterizacion',\App\Http\Controllers\FichasDeCaracterizacionController::class);
 Route::resource('aprendices', \App\Http\Controllers\AprendicesController::class);
 Route::resource('instructores', \App\Http\Controllers\InstructoresController::class);
 

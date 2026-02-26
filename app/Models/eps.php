@@ -19,12 +19,12 @@ class eps extends Model
     ];
     public $timestamps = false;
 
-    public function aprendices()
+    /*public function aprendices()
     {
         return $this->hasMany(
             Aprendices::class,
             'tbleps_NIS',
             'NIS'
         );
-    }
+    }*/
 }

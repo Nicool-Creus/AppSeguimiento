@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\eps;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\validator;
 
 class EpsController extends Controller
 {
@@ -16,7 +18,7 @@ class EpsController extends Controller
         $eps = DB::table('tbleps')
             ->GET();
 
-        return view('Eps.index.blade', compact('eps'));
+        return view('Eps.index', compact('eps'));
 
         //Otra forma:
         /*$eps = eps::all();
@@ -28,7 +30,7 @@ class EpsController extends Controller
      */
     public function create()
     {
-        //
+        return view('Eps.create');
     }
 
     /**
@@ -36,13 +38,30 @@ class EpsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $v=validator::make($request->all(),[
+            'NumDoc'=>['required'],
+            'Denominacion'=>['required'],
+        ]);
+
+        if ($v->fails()){
+            return back()->withErrors($v)->withInput();
+        }
+
+        $input=$request->all();
+        $input['NumDoc']=$input['NumDoc'];
+        $input['Denominacion']=$input['Denominacion'];
+        $input['Observaciones']=$input['Observaciones'];
+
+        eps::create($input);
+
+        return redirect()->route('eps.index')->with('success', 'eps registrada exitosamente');
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $NIS)
     {
         //
     }
@@ -50,24 +69,45 @@ class EpsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $NIS)
     {
-        //
+        $eps = eps::find($NIS);
+
+        if (!$eps) {
+            return redirect()->route('eps.index')
+                ->with('error', 'El ID no existe');
+        }
+
+        return view('Eps.edit', compact('eps'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $NIS)
     {
-        //
+        $eps = eps::find($NIS);
+
+        $request->validate([
+            'NumDoc'=>'required',
+            'Denominacion'=>'required',
+        ]);
+
+        $eps->update($request->all());
+
+        return redirect()->route('eps.index')
+            ->with('success', 'Datos de la eps actualizados correctamente');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $NIS)
     {
-        //
+        $eps = eps::find($NIS);
+        $eps->delete();
+
+        return redirect()->route('eps.index')
+            ->with('success', 'La eps se ha eliminado correctamente');
     }
 }

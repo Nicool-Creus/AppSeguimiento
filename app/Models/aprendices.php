@@ -12,7 +12,6 @@ class aprendices extends Model
     protected $table = 'tblaprendices';
 
     protected $primaryKey = 'NIS';
-    public $incrementing = false;
     protected $keyType = 'int';
 
     protected $fillable = [

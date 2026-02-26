@@ -102,7 +102,7 @@ class AprendicesController extends Controller
         $tiposDocumentos = tiposdocumentos::all();
         $eps = eps::all();
 
-        return view('aprendices.edit', compact('aprendices', 'tiposDocumentos', 'eps'));
+        return view('Aprendices.edit', compact('aprendices', 'tiposDocumentos', 'eps'));
     }
 
     /**

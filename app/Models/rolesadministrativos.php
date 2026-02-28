@@ -9,6 +9,8 @@ class rolesadministrativos extends Model
 {
     use HasFactory;
     protected $table = 'tblrolesadministrativos';
+    protected $primaryKey = 'NIS';
+    protected $keyType = 'int';
 
     protected $fillable = [
         'NIS', 'Descripcion'

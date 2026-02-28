@@ -31,7 +31,6 @@
         <th style="text-align: center;" scope="col">Correo personal</th>
         <th style="text-align: center;" scope="col">Sexo</th>
         <th style="text-align: center;" scope="col">Fecha de nacimiento</th>
-        <th style="text-align: center;" scope="col">Tipo de documento</th>
         <th style="text-align: center;" scope="col">EPS</th>
     </tr>
     </thead>
@@ -39,7 +38,7 @@
 
     @foreach($aprendices as $aprendices)
         <tr>
-            <td>{{$aprendices->TipoDoc}}</td>
+            <td>{{$aprendices->tiposdocumentos->Denominacion ?? 'No tiene'}}</td>
             <td>{{$aprendices->NumDoc}}</td>
             <td>{{$aprendices->Nombres}}</td>
             <td>{{$aprendices->Apellidos}}</td>
@@ -47,15 +46,14 @@
             <td>{{$aprendices->Telefono}}</td>
             <td>{{$aprendices->CorreoInstitucional}}</td>
             <td>{{$aprendices->CorreoPersonal}}</td>
-            <td>{{$aprendices->Sexo}}</td>
+            <td>{{$aprendices->sexo_texto}}</td>
             <td>{{$aprendices->FechaNac}}</td>
-            <td>{{$aprendices->tipoDocumento->Denominacion ?? 'Sin tipo' }}</td>
-            <td>{{$aprendices->eps->Denominacion ?? 'Sin EPS' }}</td>
+            <td>{{$aprendices->eps->Denominacion ?? 'Sin EPS'}}</td>
 
             <td class="text-center">
 
                 <a href="{{ route('aprendices.show', $aprendices->NIS) }}"
-                   class="btn btn-info btn-sm">Consultar</a>
+                   class="btn btn-info btn-sm">Ver</a>
 
                 <a href="{{ route('aprendices.edit', $aprendices->NIS) }}"
                    class="btn btn-info btn-sm">Actualizar</a>
@@ -72,6 +70,17 @@
 
     </tbody>
 </table>
+
+<div>
+    <a href="{{ route('aprendices.create') }}"
+       class="btn btn-info btn-sm">Registrar</a>
+</div>
+
+<div class="mb-3">
+    <a href="{{ route('home') }}" class="btn btn-secondary">
+        ⬅ Volver al Inicio
+    </a>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 

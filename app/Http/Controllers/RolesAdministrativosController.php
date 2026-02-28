@@ -61,7 +61,14 @@ class RolesAdministrativosController extends Controller
      */
     public function show(string $NIS)
     {
-        //
+        $rolesAdministrativos = rolesadministrativos::find($NIS);
+
+        if (!$rolesAdministrativos) {
+            return redirect()->route('rolesAdministrativos.index')
+                ->with('error', 'El NIS no existe');
+        }
+
+        return view('Roles_administrativos.show', compact('rolesAdministrativos'));
     }
 
     /**

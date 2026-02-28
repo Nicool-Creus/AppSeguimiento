@@ -26,23 +26,37 @@
             <td>{{$tiposDocumentos->Denominacion}}</td>
             <td>{{$tiposDocumentos->Observaciones}}</td>
 
-            <a href="{{ route('tiposDocumentos.show', $tiposDocumentos->NIS) }}"
-               class="btn btn-info btn-sm">Consultar</a>
+            <td class="text-center">
 
-            <a href="{{ route('tiposDocumentos.edit', $tiposDocumentos->NIS) }}"
-               class="btn btn-info btn-sm">Actualizar</a>
+                <a href="{{ route('tiposDocumentos.show', $tiposDocumentos->NIS) }}"
+                   class="btn btn-info btn-sm">Ver</a>
 
-            <form action="{{ route('tiposDocumentos.destroy', $tiposDocumentos->NIS) }}"
-                  method="POST" style="display: inline;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de querer eliminar este registro?')">Eliminar</button>
-            </form>
+                <a href="{{ route('tiposDocumentos.edit', $tiposDocumentos->NIS) }}"
+                   class="btn btn-info btn-sm">Actualizar</a>
+
+                <form action="{{ route('tiposDocumentos.destroy', $tiposDocumentos->NIS) }}"
+                      method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de querer eliminar este registro?')">Eliminar</button>
+                </form>
+            </td>
         </tr>
     @endforeach
 
     </tbody>
 </table>
+
+<div>
+    <a href="{{ route('tiposDocumentos.create') }}"
+       class="btn btn-info btn-sm">Registrar</a>
+</div>
+
+<div class="mb-3">
+    <a href="{{ route('home') }}" class="btn btn-secondary">
+        ⬅ Volver al Inicio
+    </a>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 

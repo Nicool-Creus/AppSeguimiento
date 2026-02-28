@@ -86,7 +86,15 @@ class InstructoresController extends Controller
      */
     public function show(string $NIS)
     {
-        //
+        $insructores = instructores::with(['rolesadministrativos', 'tiposdocumentos'])
+            ->find($NIS);
+
+        if (!$insructores) {
+            return redirect()->route('instructores.index')
+                ->with('error', 'El NIS no existe');
+        }
+
+        return view('Instructores.show', compact('insructores'));
     }
 
     /**

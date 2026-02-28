@@ -122,15 +122,15 @@
         <select name="tbltiposdocumentos_NIS" class="form-control">
             @foreach($tiposDocumentos as $tipo)
                 <option value="{{ $tipo->NIS }}">
-                    {{ $tipo->Nombre }}
+                    {{ $tipo->Denominacion }}
                 </option>
             @endforeach
         </select>
 
         <select name="tbleps_NIS" class="form-control">
             @foreach($eps as $e)
-                <option value="{{ $e->NIS }}">
-                    {{ $e->Nombre }}
+                <option value="{{ $e->NIS }}" {{ $aprendices->tbleps_NIS==$e->NIS ? 'selected' : '' }}>
+                    {{ $e->Denominacion }}
                 </option>
             @endforeach
         </select>

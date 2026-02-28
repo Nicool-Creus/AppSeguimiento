@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\entecoformador;
+use App\Models\tiposdocumentos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -15,8 +16,7 @@ class EnteCoformadorController extends Controller
     public function index()
     {
 
-        $enteCoformador = DB::table('tblentecoformadores')
-            ->GET();
+        $enteCoformador = entecoformador::with(['tiposDocumentos'])->get();
 
         return view('Ente_coformador.index', compact('enteCoformador'));
 
@@ -30,6 +30,8 @@ class EnteCoformadorController extends Controller
      */
     public function create()
     {
+        $tiposDocumentos = TiposDocumentos::all();
+
         return view('Ente_coformador.create');
     }
 
@@ -69,7 +71,17 @@ class EnteCoformadorController extends Controller
      */
     public function show(string $NIS)
     {
-        //
+
+        $enteCoformador = entecoformador::with(['tipoDocumento'])
+            ->find($NIS);
+
+        if (!$enteCoformador) {
+            return redirect()->route('enteCoformador.index')
+                ->with('error', 'El NIS no existe');
+        }
+
+        return view('Ente_coformador.show', compact('enteCoformador'));
+
     }
 
     /**
@@ -84,7 +96,9 @@ class EnteCoformadorController extends Controller
                 ->with('error', 'El NIS no existe');
         }
 
-        return view('Ente_coformador.edit', compact('enteCoformador'));
+        $tiposDocumentos = TiposDocumentos::all();
+
+        return view('Ente_coformador.edit', compact('enteCoformador', 'tiposDocumentos'));
     }
 
     /**

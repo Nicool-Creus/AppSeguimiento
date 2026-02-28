@@ -75,7 +75,15 @@ class FichasDeCaracterizacionController extends Controller
      */
     public function show(string $NIS)
     {
-        //
+        $fichasDeCaracterizacion = fichasdecaracterizacion::with(['aprendices', 'centrosDeFormacion', 'programasdeformacion'])
+            ->find($NIS);
+
+        if (!$fichasDeCaracterizacion) {
+            return redirect()->route('fichasCaracterizacion.index')
+                ->with('error', 'El NIS no existe');
+        }
+
+        return view('Fichas_de_caracterizacion.show', compact('fichasDeCaracterizacion'));
     }
 
     /**

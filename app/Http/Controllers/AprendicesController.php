@@ -15,7 +15,7 @@ class AprendicesController extends Controller
      */
     public function index()
     {
-        $aprendices = Aprendices::with(['tiposDocumentos', 'eps'])->get();
+        $aprendices = Aprendices::with(['tiposdocumentos', 'eps'])->get();
 
         return view('Aprendices.index', compact('aprendices'));
 
@@ -41,7 +41,7 @@ class AprendicesController extends Controller
     public function store(Request $request)
     {
         $v=validator::make($request->all(),[
-            'TipoDoc'=>['required'],
+            'tbltiposdocumentos_NIS'=>'required|exists:tbltiposdocumentos,NIS',
             'NumDoc'=>['required'],
             'Nombres'=>['required'],
             'Apellidos'=>['required'],
@@ -51,6 +51,7 @@ class AprendicesController extends Controller
             'CorreoPersonal'=>['required', 'email'],
             'Sexo'=>['required'],
             'FechaNac'=>['required', 'date'],
+            'tbleps_NIS'=>'required|exists:tbleps,NIS'
         ]);
         //dd($request->all());
 
@@ -59,7 +60,7 @@ class AprendicesController extends Controller
         }
 
         $input=$request->all();
-        $input['TipoDoc']=$input['TipoDoc'];
+        $input['tbltiposdocumentos_NIS']=$input['tbltiposdocumentos_NIS'];
         $input['NumDoc']=$input['NumDoc'];
         $input['Nombres']=$input['Nombres'];
         $input['Apellidos']=$input['Apellidos'];
@@ -69,6 +70,7 @@ class AprendicesController extends Controller
         $input['CorreoPersonal']=$input['CorreoPersonal'];
         $input['Sexo']=$input['Sexo'];
         $input['FechaNac']=$input['FechaNac'];
+        $input['tbleps_NIS']=$input['tbleps_NIS'];
 
         aprendices::create($input);
         //$successMsg="Aprendiz registrado correctamente";
@@ -81,9 +83,17 @@ class AprendicesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $NIS)
     {
-        //
+        $aprendiz = Aprendices::with(['tiposdocumentos', 'eps'])
+            ->get($NIS);
+
+        if (!$aprendiz) {
+            return redirect()->route('aprendices.index')
+                ->with('error', 'El NIS no existe');
+        }
+
+        return view('Aprendices.show', compact('aprendiz'));
     }
 
     /**
@@ -127,6 +137,8 @@ class AprendicesController extends Controller
             'CorreoPersonal'=>'required', 'email',
             'Sexo'=>'required',
             'FechaNac'=>'required', 'date',
+            'tbltiposdocumentos_NIS'=>'required',
+            'tbleps_NIS'=>'required'
         ]);
 
         $aprendices->update($request->all());

@@ -63,7 +63,15 @@ class EpsController extends Controller
      */
     public function show(string $NIS)
     {
-        //
+        $eps = eps::find($NIS);
+
+        if (!$eps) {
+            return redirect()->route('eps.index')
+                ->with('error', 'El NIS no existe');
+        }
+
+        return view('Eps.show', compact('eps'));
+
     }
 
     /**

@@ -33,10 +33,12 @@ class="d-inline" id="frmRegAprendiz">
     <div class="card-body">
         <div class="form-group row">
 
-            <label for="TipoDoc">Tipo de documento</label>
-            <select name="TipoDoc" id="TipoDoc" class="form-control" style="">
-                <option selected="selected" value="1">Cédula de ciudadania</option>
-                <option value="2">Tarjeta de identidad</option>
+            <select name="tbltiposdocumentos_NIS" class="form-control">
+                @foreach($tiposDocumentos as $tipo)
+                    <option value="{{ $tipo->NIS }}">
+                        {{ $tipo->Denominacion }}
+                    </option>
+                @endforeach
             </select>
         </div>
 
@@ -115,14 +117,6 @@ class="d-inline" id="frmRegAprendiz">
             <label for="FechaNac">Fecha de nacimiento</label>
             <input type="date" class="form-control" name="FechaNac" id="FechaNac" placeholder="Fecha de nacimiento">
         </div>
-
-        <select name="tbltiposdocumentos_NIS" class="form-control">
-            @foreach($tiposDocumentos as $tipo)
-                <option value="{{ $tipo->NIS }}">
-                    {{ $tipo->Denominacion }}
-                </option>
-            @endforeach
-        </select>
 
         <select name="tbleps_NIS" class="form-control">
             @foreach($eps as $e)

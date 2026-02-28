@@ -34,6 +34,14 @@
 
         <div class="form-group col-md-3">
             <label for="Denominacion">Denominación</label>
+            <select name="Sexo" id="Denominacion" class="form-control" style="">
+                <option selected="selected" value="1">Masculino</option>
+                <option value="2">Femenino</option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="Denominacion">Denominación</label>
             <input type="text" class="form-control" name="Denominacion" id="Denominacion" placeholder="Denominacion" value="{{old('Denominacion')}}">
 
             @error('Denominacion')

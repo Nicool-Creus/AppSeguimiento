@@ -37,7 +37,7 @@
             <td class="text-center">
 
                 <a href="{{ route('enteCoformador.show', $enteCoformador->NIS) }}"
-                   class="btn btn-info btn-sm">Consultar</a>
+                   class="btn btn-info btn-sm">Ver</a>
 
                 <a href="{{ route('enteCoformador.update', $enteCoformador->NIS) }}"
                    class="btn btn-info btn-sm">Actualizar</a>
@@ -53,6 +53,17 @@
 
     </tbody>
 </table>
+
+<div>
+    <a href="{{ route('enteCoformador.create') }}"
+       class="btn btn-info btn-sm">Registrar</a>
+</div>
+
+<div class="mb-3">
+    <a href="{{ route('home') }}" class="btn btn-secondary">
+        ⬅ Volver al Inicio
+    </a>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 

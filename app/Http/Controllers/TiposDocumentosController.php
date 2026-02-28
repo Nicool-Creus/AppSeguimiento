@@ -61,7 +61,14 @@ class TiposDocumentosController extends Controller
      */
     public function show(string $NIS)
     {
-        //
+        $tiposDocumentos = tiposdocumentos::find($NIS);
+
+        if (!$tiposDocumentos) {
+            return redirect()->route('tiposDocumentos.index')
+                ->with('error', 'El NIS no existe');
+        }
+
+        return view('Tipos_documentos.show', compact('tiposDocumentos'));
     }
 
     /**

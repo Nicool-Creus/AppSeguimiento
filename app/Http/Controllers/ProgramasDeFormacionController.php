@@ -62,9 +62,16 @@ class ProgramasDeFormacionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $NIS)
     {
-        //
+        $programas = programasdeformacion::find($NIS);
+
+        if (!$programas) {
+            return redirect()->route('programas.index')
+                ->with('error', 'El NIS no existe');
+        }
+
+        return view('Programas.show', compact('programas'));
     }
 
     /**

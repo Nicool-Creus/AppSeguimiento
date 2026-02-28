@@ -61,7 +61,14 @@ class RegionalesController extends Controller
      */
     public function show(string $NIS)
     {
-        //
+        $regionales = regionales::find($NIS);
+
+        if (!$regionales) {
+            return redirect()->route('regionales.index')
+                ->with('error', 'El NIS no existe');
+        }
+
+        return view('Regionales.show', compact('regionales'));
     }
 
     /**

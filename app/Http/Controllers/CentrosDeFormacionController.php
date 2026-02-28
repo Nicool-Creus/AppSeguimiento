@@ -69,7 +69,15 @@ class CentrosDeFormacionController extends Controller
      */
     public function show(string $NIS)
     {
-        //
+        $centrosDeFormacion = centrosdeformacion::with(['regionales'])
+            ->find($NIS);
+
+        if (!$centrosDeFormacion) {
+            return redirect()->route('centrosFormacion.index')
+                ->with('error', 'El NIS no existe');
+        }
+
+        return view('Centros_de_formacion.show', compact('centrosDeFormacion'));
     }
 
     /**

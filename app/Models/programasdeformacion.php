@@ -9,6 +9,8 @@ class programasdeformacion extends Model
 {
     use HasFactory;
     protected $table = 'tblprogramasdeformacion';
+    protected $primaryKey = 'NIS';
+    protected $keyType = 'int';
 
     protected $fillable = [
         'NIS', 'Codigo', 'Denominacion', 'Observaciones'

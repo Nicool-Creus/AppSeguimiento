@@ -9,6 +9,8 @@ class regionales extends Model
 {
     use HasFactory;
     protected $table = 'tblregionales';
+    protected $primaryKey = 'NIS';
+    protected $keyType = 'int';
 
     protected $fillable = [
         'NIS', 'Codigo', 'Denominacion', 'Observaciones'

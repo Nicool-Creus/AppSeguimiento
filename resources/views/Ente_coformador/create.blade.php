@@ -85,6 +85,13 @@
             @enderror
         </div>
 
+        <select name="tbltiposdocumentos_NIS" class="form-control">
+            @foreach($tiposDocumentos as $tipo)
+                <option value="{{ $tipo->NIS }}">
+                    {{ $tipo->Denominacion }}
+                </option>
+            @endforeach
+        </select>
     </div>
 
     <div class="form-group mt-3">

@@ -53,8 +53,7 @@
         <div class="col-md-6 mb-3">
             <label>Observaciones</label>
             <input type="text" name="Observaciones"
-                   value="{{ old('Observaciones', $programas->Observaciones) }}"
-                   class="form-control @error('Observaciones') is-invalid @enderror">
+                   value="{{ old('Observaciones', $programas->Observaciones) }}">
         </div>
 
     </div>

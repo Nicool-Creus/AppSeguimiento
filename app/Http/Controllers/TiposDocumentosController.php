@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\tiposdocumentos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class TiposDocumentosController extends Controller
 {
@@ -17,7 +18,8 @@ class TiposDocumentosController extends Controller
         $tiposDocumentos = DB::table('tbltiposdocumentos')
             ->GET();
 
-        return view('Tipos_documentos.index.blade', compact('tiposDocumentos'));
+        return view('Tipos_documentos.index', compact('tiposDocumentos'));
+
         //Otra forma:
         /*$tiposDocumentos = TiposDocumentos::all();
         return view('TiposDocumentos.index.blade', compact('tiposDocumentos'));*/
@@ -28,7 +30,7 @@ class TiposDocumentosController extends Controller
      */
     public function create()
     {
-        //
+        return view('Tipos_documentos.create');
     }
 
     /**
@@ -36,13 +38,28 @@ class TiposDocumentosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $v=validator::make($request->all(),[
+            'Denominacion'=>['required'],
+        ]);
+
+        if ($v->fails()){
+            return back()->withErrors($v)->withInput();
+        }
+
+        $input=$request->all();
+        $input['Denominacion']=$input['Denominacion'];
+        $input['Observaciones']=$input['Observaciones'];
+
+        tiposdocumentos::create($input);
+
+        return redirect()->route('tiposDocumentos.index')->with('success', 'Documento registrado exitosamente');
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $NIS)
     {
         //
     }
@@ -50,24 +67,44 @@ class TiposDocumentosController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $NIS)
     {
-        //
+        $tiposDocumentos = tiposdocumentos::find($NIS);
+
+        if (!$tiposDocumentos) {
+            return redirect()->route('tiposDocumentos.index')
+                ->with('error', 'El NIS no existe');
+        }
+
+        return view('Tipos_documentos.edit', compact('tiposDocumentos'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $NIS)
     {
-        //
+        $tiposDocumentos = tiposdocumentos::find($NIS);
+
+        $request->validate([
+            'Denominacion'=>'required',
+        ]);
+
+        $tiposDocumentos->update($request->all());
+
+        return redirect()->route('tiposDocumentos.index')
+            ->with('success', 'Datos del documento actualizados correctamente');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $NIS)
     {
-        //
+        $tiposDocumentos = tiposdocumentos::find($NIS);
+        $tiposDocumentos->delete();
+
+        return redirect()->route('tiposDocumentos.index')
+            ->with('success', 'El tipo de docuemnto se ha eliminado correctamente');
     }
 }

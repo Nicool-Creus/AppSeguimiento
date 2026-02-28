@@ -119,7 +119,7 @@ class="d-inline" id="frmRegAprendiz">
         <select name="tbltiposdocumentos_NIS" class="form-control">
             @foreach($tiposDocumentos as $tipo)
                 <option value="{{ $tipo->NIS }}">
-                    {{ $tipo->Nombre }}
+                    {{ $tipo->Denominacion }}
                 </option>
             @endforeach
         </select>
@@ -127,7 +127,7 @@ class="d-inline" id="frmRegAprendiz">
         <select name="tbleps_NIS" class="form-control">
             @foreach($eps as $e)
                 <option value="{{ $e->NIS }}">
-                    {{ $e->Nombre }}
+                    {{ $e->Denominacion }}
                 </option>
             @endforeach
         </select>

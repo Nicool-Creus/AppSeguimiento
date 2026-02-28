@@ -10,7 +10,6 @@ class aprendices extends Model
 //HI
     use HasFactory;
     protected $table = 'tblaprendices';
-
     protected $primaryKey = 'NIS';
     protected $keyType = 'int';
 

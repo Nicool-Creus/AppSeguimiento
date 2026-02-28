@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\eps;
 use App\Models\instructores;
+use App\Models\rolesadministrativos;
+use App\Models\tiposdocumentos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -29,7 +32,11 @@ class InstructoresController extends Controller
      */
     public function create()
     {
-        return view('Instructores.create');
+        $eps = eps::all();
+        $rolesAdministrativos = rolesadministrativos::all();
+        $tiposDocumentos = tiposdocumentos::all();
+
+        return view('Instructores.create', compact('eps', 'rolesAdministrativos', 'tiposDocumentos'));
     }
 
     /**
@@ -94,7 +101,11 @@ class InstructoresController extends Controller
                 ->with('error', 'El ID no existe');
         }
 
-        return view('Instructores.edit', compact('instructores'));
+        $eps = eps::all();
+        $rolesAdministrativos = rolesadministrativos::all();
+        $tiposDocumentos = tiposdocumentos::all();
+
+        return view('Instructores.edit', compact('instructores', 'eps', 'rolesAdministrativos', 'tiposDocumentos'));
     }
 
     /**
@@ -103,6 +114,11 @@ class InstructoresController extends Controller
     public function update(Request $request, string $NIS)
     {
         $instructores = instructores::find($NIS);
+
+        if (!$instructores) {
+            return redirect()->route('instructores.index')
+                ->with('error', 'El NIS no existe');
+        }
 
         $request->validate([
             'TipoDoc'=>'required',
@@ -129,6 +145,12 @@ class InstructoresController extends Controller
     public function destroy(string $NIS)
     {
         $instructores = instructores::find($NIS);
+
+        if (!$instructores) {
+            return redirect()->route('instructores.index')
+                ->with('error', 'El NIS no existe');
+        }
+
         $instructores->delete();
 
         return redirect()->route('instructores.index')

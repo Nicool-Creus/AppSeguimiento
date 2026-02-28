@@ -25,6 +25,19 @@
         <tr>
             <td>{{$tiposDocumentos->Denominacion}}</td>
             <td>{{$tiposDocumentos->Observaciones}}</td>
+
+            <a href="{{ route('tiposDocumentos.show', $tiposDocumentos->NIS) }}"
+               class="btn btn-info btn-sm">Consultar</a>
+
+            <a href="{{ route('tiposDocumentos.edit', $tiposDocumentos->NIS) }}"
+               class="btn btn-info btn-sm">Actualizar</a>
+
+            <form action="{{ route('tiposDocumentos.destroy', $tiposDocumentos->NIS) }}"
+                  method="POST" style="display: inline;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de querer eliminar este registro?')">Eliminar</button>
+            </form>
         </tr>
     @endforeach
 

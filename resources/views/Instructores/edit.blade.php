@@ -30,7 +30,7 @@
     </div>
 @endif
 
-<form action="{{ route('instructores.update', $instructor->id) }}" method="POST">
+<form action="{{ route('instructores.update', $instructor->NIS) }}" method="POST">
     @csrf
     @method('PUT')
 
@@ -118,6 +118,30 @@
                    value="{{ old('FechaNac', $instructor->FechaNac) }}"
                    class="form-control @error('FechaNac') is-invalid @enderror">
         </div>
+
+        <select name="tbleps_NIS" class="form-control">
+            @foreach($eps as $e)
+                <option value="{{ $e->NIS }}">
+                    {{ $e->Denominacion }}
+                </option>
+            @endforeach
+        </select>
+
+        <select name="tblrolesadministrativos_NIS" class="form-control">
+            @foreach($rolesAdministrativos as $rol)
+                <option value="{{ $rol->NIS }}">
+                    {{ $rol->Descripcion }}
+                </option>
+            @endforeach
+        </select>
+
+        <select name="tbltiposdocumentos_NIS" class="form-control">
+            @foreach($tiposDocumentos as $tipo)
+                <option value="{{ $tipo->NIS }}">
+                    {{ $tipo->Denominacion }}
+                </option>
+            @endforeach
+        </select>
 
     </div>
 

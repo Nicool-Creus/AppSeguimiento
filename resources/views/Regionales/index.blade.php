@@ -26,6 +26,21 @@
             <th >{{$regionales->Codigo}}</th>
             <td>{{$regionales->Denominacion}}</td>
             <td>{{$regionales->Observaciones}}</td>
+
+            <td class="text-center">
+
+                <a href="{{ route('regionales.show', $regionales->NIS) }}"
+                   class="btn btn-info btn-sm">Consultar</a>
+
+                <a href="{{ route('regionales.update', $regionales->NIS) }}"
+                   class="btn btn-info btn-sm">Actualizar</a>
+
+                <form action="{{ route('regionales.destroy', $regionales->NIS) }}"
+                      method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de querer eliminar este registro?')">Eliminar</button>
+                </form>
         </tr>
     @endforeach
 

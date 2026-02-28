@@ -22,6 +22,19 @@
     @foreach($rolesAdministrativos as $rolesAdministrativos)
         <tr>
             <td >{{$rolesAdministrativos->Descripcion}}</td>
+
+            <a href="{{ route('rolesAdministrativos.show', $rolesAdministrativos->NIS) }}"
+               class="btn btn-info btn-sm">Consultar</a>
+
+            <a href="{{ route('rolesAdministrativos.edit', $rolesAdministrativos->NIS) }}"
+               class="btn btn-info btn-sm">Actualizar</a>
+
+            <form action="{{ route('rolesAdministrativos.destroy', $rolesAdministrativos->NIS) }}"
+                  method="POST" style="display: inline;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de querer eliminar este registro?')">Eliminar</button>
+            </form>
         </tr>
     @endforeach
 

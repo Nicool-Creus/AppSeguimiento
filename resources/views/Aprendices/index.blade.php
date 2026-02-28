@@ -31,7 +31,8 @@
         <th style="text-align: center;" scope="col">Correo personal</th>
         <th style="text-align: center;" scope="col">Sexo</th>
         <th style="text-align: center;" scope="col">Fecha de nacimiento</th>
-        <th scope="col"></th>
+        <th style="text-align: center;" scope="col">Tipo de documento</th>
+        <th style="text-align: center;" scope="col">EPS</th>
     </tr>
     </thead>
     <tbody>
@@ -48,8 +49,8 @@
             <td>{{$aprendices->CorreoPersonal}}</td>
             <td>{{$aprendices->Sexo}}</td>
             <td>{{$aprendices->FechaNac}}</td>
-            <td>{{$aprendices->tipoDocumento->nombre ?? 'Sin tipo' }}</td>
-            <td>{{$aprendices->eps->nombre ?? 'Sin EPS' }}</td>
+            <td>{{$aprendices->tipoDocumento->Denominacion ?? 'Sin tipo' }}</td>
+            <td>{{$aprendices->eps->Denominacion ?? 'Sin EPS' }}</td>
 
             <td class="text-center">
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\rolesadministrativos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class RolesAdministrativosController extends Controller
 {
@@ -17,7 +18,7 @@ class RolesAdministrativosController extends Controller
         $rolesAdministrativos = DB::table('tblrolesadministrativos')
             ->GET();
 
-        return view('Roles_administrativos.index.blade', compact('rolesAdministrativos'));
+        return view('Roles_administrativos.index', compact('rolesAdministrativos'));
 
         //Otra forma:
         /*$rolesAdministrativos = RolesAdministrativos::all();
@@ -29,7 +30,7 @@ class RolesAdministrativosController extends Controller
      */
     public function create()
     {
-        //
+        return view('Roles_administrativos.create');
     }
 
     /**
@@ -37,13 +38,28 @@ class RolesAdministrativosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $v=validator::make($request->all(),[
+            'Descripcion'=>['required'],
+
+        ]);
+
+        if ($v->fails()){
+            return back()->withErrors($v)->withInput();
+        }
+
+        $input=$request->all();
+        $input['Descripcion']=$input['Descripcion'];
+
+        rolesadministrativos::create($input);
+
+        return redirect()->route('rolesAdministrativos.index')->with('success', 'Rol registrado exitosamente');
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $NIS)
     {
         //
     }
@@ -51,24 +67,44 @@ class RolesAdministrativosController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $NIS)
     {
-        //
+        $rolesAdministrativos = rolesadministrativos::find($NIS);
+
+        if (!$rolesAdministrativos) {
+            return redirect()->route('rolesAdministrativos.index')
+                ->with('error', 'El NIS no existe');
+        }
+
+        return view('Roles_administrativos.edit', compact('rolesAdministrativos'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $NIS)
     {
-        //
+        $rolesAdministrativos = rolesadministrativos::find($NIS);
+
+        $request->validate([
+            'Descripcion'=>'required',
+        ]);
+
+        $rolesAdministrativos->update($request->all());
+
+        return redirect()->route('rolesAdministrativos.index')
+            ->with('success', 'Rol actualizado correctamente');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $NIS)
     {
-        //
+        $rolesAdministrativos = rolesadministrativos::find($NIS);
+        $rolesAdministrativos->delete();
+
+        return redirect()->route('rolesAdministrativos.index')
+            ->with('success', 'El rol se ha eliminado correctamente');
     }
 }

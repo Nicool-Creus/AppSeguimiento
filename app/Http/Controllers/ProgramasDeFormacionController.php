@@ -41,7 +41,6 @@ class ProgramasDeFormacionController extends Controller
         $v=validator::make($request->all(),[
             'Codigo'=>['required'],
             'Denominacion'=>['required'],
-            'Observaciones'=>['required'],
         ]);
         //dd($request->all());
 
@@ -75,6 +74,11 @@ class ProgramasDeFormacionController extends Controller
     {
         $programas = programasdeformacion::find($NIS);
 
+        if (!$programas) {
+            return redirect()->route('programas.index')
+                ->with('error', 'El NIS no existe');
+        }
+
         return view('programas.edit', compact('programas'));
     }
 
@@ -93,7 +97,6 @@ class ProgramasDeFormacionController extends Controller
         $request->validate([
             'Codigo'=>'required',
             'Denominacion'=>'required',
-            'Observaciones'=>'required',
         ]);
 
         $programas->update($request->all());
@@ -108,7 +111,6 @@ class ProgramasDeFormacionController extends Controller
     public function destroy(int $NIS)
     {
         $programas = programasdeformacion::find($NIS);
-
         $programas->delete();
 
         return redirect()->route('programas.index')

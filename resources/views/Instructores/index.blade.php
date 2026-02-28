@@ -51,13 +51,13 @@
 
             <td class="text-center">
 
-                <a href="{{ route('instructores.show', $instructores->id) }}"
+                <a href="{{ route('instructores.show', $instructores->NIS) }}"
                    class="btn btn-info btn-sm">Consultar</a>
 
-                <a href="{{ route('instructores.edit', $instructores->id) }}"
+                <a href="{{ route('instructores.edit', $instructores->NIS) }}"
                    class="btn btn-info btn-sm">Actualizar</a>
 
-                <form action="{{ route('instructores.destroy', $instructores->id) }}"
+                <form action="{{ route('instructores.destroy', $instructores->NIS) }}"
                        method="POST" style="display: inline;">
                      @csrf
                      @method('DELETE')

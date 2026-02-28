@@ -20,6 +20,8 @@
         <th style="text-align: center;" scope="col">Fecha de inicio</th>
         <th style="text-align: center;" scope="col">Fecha de finalización</th>
         <th style="text-align: center;" scope="col">Observaciones</th>
+        <th style="text-align: center;" scope="col">Centro de formación</th>
+        <th style="text-align: center;" scope="col">Programa de formación</th>
     </tr>
     </thead>
     <tbody>
@@ -32,6 +34,24 @@
             <td>{{$fichasDeCaracterizacion->FechaInicio}}</td>
             <td>{{$fichasDeCaracterizacion->FechaFin}}</td>
             <td>{{$fichasDeCaracterizacion->Observaciones}}</td>
+            <td>{{$fichasDeCaracterizacion->centrosDeFormacion->Denominacion ?? 'Sin centro' }}</td>
+            <td>{{$fichasDeCaracterizacion->eps->Programa ?? 'Sin programa' }}</td>
+
+            <td class="text-center">
+
+                <a href="{{ route('fichasCaracterizacion.show', $fichasDeCaracterizacion->NIS) }}"
+                   class="btn btn-info btn-sm">Consultar</a>
+
+                <a href="{{ route('fichasCaracterizacion.edit', $fichasDeCaracterizacion->NIS) }}"
+                   class="btn btn-info btn-sm">Actualizar</a>
+
+                <form action="{{ route('fichasCaracterizacion.destroy', $fichasDeCaracterizacion->NIS) }}"
+                      method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de querer eliminar este registro?')">Eliminar</button>
+                </form>
+            </td>
         </tr>
     @endforeach
 

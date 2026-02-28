@@ -61,7 +61,7 @@ class EnteCoformadorController extends Controller
 
         entecoformador::create($input);
 
-        return redirect()->route('enteCoformador.index.index')->with('success', 'Ente coformador registrado exitosamente');
+        return redirect()->route('enteCoformador.index')->with('success', 'Ente coformador registrado exitosamente');
     }
 
     /**
@@ -81,7 +81,7 @@ class EnteCoformadorController extends Controller
 
         if (!$enteCoformador) {
             return redirect()->route('enteCoformador.index')
-                ->with('error', 'El ID no existe');
+                ->with('error', 'El NIS no existe');
         }
 
         return view('Ente_coformador.edit', compact('enteCoformador'));

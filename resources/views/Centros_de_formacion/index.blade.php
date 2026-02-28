@@ -18,6 +18,7 @@
         <th style="text-align: center;" scope="col">Denominación</th>
         <th style="text-align: center;" scope="col">Dirección</th>
         <th style="text-align: center;" scope="col">Observaciones</th>
+        <th style="text-align: center;" scope="col">Regional</th>
     </tr>
     </thead>
     <tbody>
@@ -28,6 +29,23 @@
             <td>{{$centrosDeFormacion->Denominacion}}</td>
             <td>{{$centrosDeFormacion->Direccion}}</td>
             <td>{{$centrosDeFormacion->Observaciones}}</td>
+            <td>{{$centrosDeFormacion->Regioanles->Denominacion ?? 'Sin regional' }}</td>
+
+            <td class="text-center">
+
+                <a href="{{ route('centrosFormacion.show', $centrosDeFormacion->NIS) }}"
+                   class="btn btn-info btn-sm">Consultar</a>
+
+                <a href="{{ route('centrosFormacion.edit', $centrosDeFormacion->NIS) }}"
+                   class="btn btn-info btn-sm">Actualizar</a>
+
+                <form action="{{ route('centrosFormacion.destroy', $centrosDeFormacions->NIS) }}"
+                      method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de querer eliminar este registro?')">Eliminar</button>
+                </form>
+            </td>
         </tr>
     @endforeach
 

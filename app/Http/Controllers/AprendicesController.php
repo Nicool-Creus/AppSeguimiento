@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\aprendices;
 use App\Models\eps;
 use App\Models\tiposdocumentos;
-use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\validator;
 

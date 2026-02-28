@@ -33,6 +33,21 @@
             <td>{{$enteCoformador->Direccion}}</td>
             <td>{{$enteCoformador->Telefono}}</td>
             <td>{{$enteCoformador->CorreoInstitucional}}</td>
+
+            <td class="text-center">
+
+                <a href="{{ route('enteCoformador.show', $enteCoformador->NIS) }}"
+                   class="btn btn-info btn-sm">Consultar</a>
+
+                <a href="{{ route('enteCoformador.update', $enteCoformador->NIS) }}"
+                   class="btn btn-info btn-sm">Actualizar</a>
+
+                <form action="{{ route('enteCoformador.destroy', $enteCoformador->NIS) }}"
+                      method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de querer eliminar este registro?')">Eliminar</button>
+                </form>
         </tr>
     @endforeach
 

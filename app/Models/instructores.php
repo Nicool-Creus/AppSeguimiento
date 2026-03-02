@@ -13,10 +13,13 @@ class instructores extends Model
     protected $keyType = 'int';
 
     protected $fillable = [
-        'NIS', 'TipoDoc', 'NumDoc', 'Nombres', 'Apellidos', 'Direccion', 'Telefono', 'CorreoInstitucional', 'CorreoPersonal', 'Sexo', 'FechaNac'
+        'NIS', 'tbltiposdocumentos_NIS', 'NumDoc', 'Nombres', 'Apellidos', 'Direccion', 'Telefono', 'CorreoInstitucional', 'CorreoPersonal', 'Sexo', 'FechaNac', 'tbleps_NIS', 'tblrolesadministrativos_NIS'
     ];
     public $timestamps = false;
-
+    public function tiposdocumentos()
+    {
+        return $this->belongsTo(tiposdocumentos::class,'tbltiposdocumentos_NIS','NIS');
+    }
     public function eps()
     {
         return $this->belongsTo(eps::class,'tbleps_NIS','NIS');
@@ -25,8 +28,17 @@ class instructores extends Model
     {
         return $this->belongsTo(rolesadministrativos::class,'tblrolesadministrativos_NIS','NIS');
     }
-    public function tiposdocumentos()
+
+    public function sexo()
     {
-        return $this->belongsTo(tiposdocumentos::class,'tbltiposdocumentos_NIS','NIS');
+        return $this->belongsTo(instructores::class,'tblinstructores_NIS','NIS');
+    }
+    public function getSexoTextoAttribute()
+    {
+        return match($this->Sexo) {
+            1 => 'Masculino',
+            2 => 'Femenino',
+            default => 'No definido'
+        };
     }
 }

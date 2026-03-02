@@ -30,7 +30,7 @@
     </div>
 @endif
 
-<form action="{{ route('centrosFormacion.update', $centrosDeFormacion->NIS) }}" method="POST">
+<form action="{{ route('centroFormacion.update', $centrosDeFormacion->NIS) }}" method="POST">
     @csrf
     @method('PUT')
 
@@ -60,13 +60,14 @@
         <div class="col-md-6 mb-3">
             <label>Observaciones</label>
             <input type="text" name="Observaciones"
-                   value="{{ old('Observaciones', $programas->Observaciones) }}">
+                   value="{{ old('Observaciones', $centrosDeFormacion->Observaciones) }}">
         </div>
 
+        <label>Regional</label>
         <select name="tblregionales_NIS" class="form-control">
             @foreach($regionales as $regional)
                 <option value="{{ $regional->NIS }}">
-                    {{ $regional->Denominación }}
+                    {{ $regional->Denominacion }}
                 </option>
             @endforeach
         </select>
@@ -75,7 +76,7 @@
 
     <div class="text-center mt-3">
         <button type="submit" class="btn btn-warning">Actualizar</button>
-        <a href="{{ route('centrosFormacion.index') }}" class="btn btn-secondary">Volver</a>
+        <a href="{{ route('centroFormacion.index') }}" class="btn btn-secondary">Volver</a>
     </div>
 
 </form>

@@ -18,18 +18,12 @@
         <div class="card">
             <div class="card-body">
 
-                <p><strong>NIS:</strong> {{ $enteCoformador->NIS }}</p>
-
-                <p><strong>Tipo Documento:</strong>
-                    {{ $enteCoformador->tipoDocumento->Denominacion ?? 'No asignado' }}
-                </p>
-
-                <p><strong>Tipo Doc:</strong> {{ $enteCoformador->TipoDoc }}</p>
+                <p><strong>Tipo Documento:</strong>{{ $enteCoformador->tiposdocumentos->Denominacion ?? 'No asignado' }}</p>
                 <p><strong>Número Documento:</strong> {{ $enteCoformador->NumDoc }}</p>
                 <p><strong>Razón social:</strong> {{ $enteCoformador->RazonSocial }}</p>
                 <p><strong>Dirección:</strong> {{ $enteCoformador->Direccion }}</p>
                 <p><strong>Teléfono:</strong> {{ $enteCoformador->Telefono }}</p>
-                <p><strong>Correo Institucional:</strong> {{ $aprendiz->CorreoInstitucional }}</p>
+                <p><strong>Correo Institucional:</strong> {{ $enteCoformador->CorreoInstitucional }}</p>
 
             </div>
         </div>

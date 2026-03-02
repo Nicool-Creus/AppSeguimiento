@@ -25,7 +25,7 @@
     </script>
 @endif
 
-<form method="POST" action="{{route('centrosFormacion.store')}}"
+<form method="POST" action="{{route('centroFormacion.store')}}"
       class="d-inline" id="frmRegCentros">
 
     @csrf
@@ -63,6 +63,7 @@
             <input type="text" class="form-control" name="Observaciones" id="Observaciones" placeholder="Observaciones" value="{{old('Observaciones')}}">
         </div>
 
+        <label for="tblregionales_NIS">Regional</label>
         <select name="tblregionales_NIS" class="form-control">
             @foreach($regionales as $regional)
                 <option value="{{ $regional->NIS }}">
@@ -77,7 +78,7 @@
     </div>
 
     <div class="text-right mt-3">
-        <a href="{{ route('centrosFormacion.index') }}" class="btn btn-secondary">Volver</a>
+        <a href="{{ route('centroFormacion.index') }}" class="btn btn-secondary">Volver</a>
     </div>
 </form>
 

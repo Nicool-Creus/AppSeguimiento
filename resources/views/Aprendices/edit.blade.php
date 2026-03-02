@@ -39,10 +39,12 @@
         <div class="col-md-6 mb-3">
             <label>Tipo de documento</label>
 
-            <select name="TipoDoc" class="form-select @error('TipoDoc') is-invalid @enderror">
-                <option value="">Seleccione</option>
-                <option value="1" {{ old('TipoDoc', $aprendices->TipoDoc) == 1 ? 'selected' : '' }}>Cédula de ciudadanía</option>
-                <option value="2" {{ old('TipoDoc', $aprendices->TipoDoc) == 2 ? 'selected' : '' }}>Documento de identidad</option>
+            <select name="tbltiposdocumentos_NIS" class="form-control">
+                @foreach($tiposDocumentos as $tipo)
+                    <option value="{{ $tipo->NIS }}">
+                        {{ $tipo->Denominacion }}
+                    </option>
+                @endforeach
             </select>
 
             @error('TipoDoc')
@@ -118,14 +120,6 @@
                    value="{{ old('FechaNac', $aprendices->FechaNac) }}"
                    class="form-control @error('FechaNac') is-invalid @enderror">
         </div>
-
-        <select name="tbltiposdocumentos_NIS" class="form-control">
-            @foreach($tiposDocumentos as $tipo)
-                <option value="{{ $tipo->NIS }}">
-                    {{ $tipo->Denominacion }}
-                </option>
-            @endforeach
-        </select>
 
         <select name="tbleps_NIS" class="form-control">
             @foreach($eps as $e)

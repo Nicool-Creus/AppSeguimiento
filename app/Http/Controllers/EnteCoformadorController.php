@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\entecoformador;
 use App\Models\tiposdocumentos;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class EnteCoformadorController extends Controller
@@ -16,7 +15,7 @@ class EnteCoformadorController extends Controller
     public function index()
     {
 
-        $enteCoformador = entecoformador::with(['tiposDocumentos'])->get();
+        $enteCoformador = entecoformador::with(['tiposdocumentos'])->get();
 
         return view('Ente_coformador.index', compact('enteCoformador'));
 
@@ -30,9 +29,9 @@ class EnteCoformadorController extends Controller
      */
     public function create()
     {
-        $tiposDocumentos = TiposDocumentos::all();
+        $tiposDocumentos = tiposdocumentos::all();
 
-        return view('Ente_coformador.create');
+        return view('Ente_coformador.create', compact('tiposDocumentos'));
     }
 
     /**
@@ -41,7 +40,7 @@ class EnteCoformadorController extends Controller
     public function store(Request $request)
     {
         $v=validator::make($request->all(),[
-            'TipoDoc'=>['required'],
+            'tbltiposdocumentos_NIS'=>'required|exists:tbltiposdocumentos,NIS',
             'NumDoc'=>['required'],
             'RazonSocial'=>['required'],
             'Direccion'=>['required'],
@@ -54,7 +53,7 @@ class EnteCoformadorController extends Controller
         }
 
         $input=$request->all();
-        $input['TipoDoc']=$input['TipoDoc'];
+        $input['tbltiposdocumentos_NIS']=$input['tbltiposdocumentos_NIS'];
         $input['NumDoc']=$input['NumDoc'];
         $input['RazonSocial']=$input['RazonSocial'];
         $input['Direccion']=bcrypt($input['Direccion']);
@@ -69,10 +68,10 @@ class EnteCoformadorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $NIS)
+    public function show(int $NIS)
     {
 
-        $enteCoformador = entecoformador::with(['tipoDocumento'])
+        $enteCoformador = entecoformador::with(['tiposdocumentos'])
             ->find($NIS);
 
         if (!$enteCoformador) {
@@ -87,7 +86,7 @@ class EnteCoformadorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $NIS)
+    public function edit(int $NIS)
     {
         $enteCoformador = entecoformador::find($NIS);
 
@@ -104,12 +103,12 @@ class EnteCoformadorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $NIS)
+    public function update(Request $request, int $NIS)
     {
         $enteCoformador = entecoformador::find($NIS);
 
         $request->validate([
-            'TipoDoc'=>'required',
+            'tbltiposdocumentos_NIS'=>'required|exists:tbltiposdocumentos,NIS',
             'NumDoc'=>'required',
             'RazonSocial'=>'required',
             'Direccion'=>'required',
@@ -126,7 +125,7 @@ class EnteCoformadorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $NIS)
+    public function destroy(int $NIS)
     {
         $enteCoformador = entecoformador::find($NIS);
         $enteCoformador->delete();

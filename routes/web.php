@@ -23,7 +23,7 @@ route::resource('regionales',\App\Http\Controllers\RegionalesController::class);
 route::resource('tiposDocumentos',\App\Http\Controllers\TiposDocumentosController::class);
 route::resource('rolesAdministrativos',\App\Http\Controllers\RolesAdministrativosController::class);
 route::resource('enteCoformador',\App\Http\Controllers\EnteCoformadorController::class);
-route::resource('centrosFormacion',\App\Http\Controllers\ProgramasDeFormacionController::class);
+route::resource('centroFormacion', \App\Http\Controllers\CentrosDeFormacionController::class);
 route::resource('fichasCaracterizacion',\App\Http\Controllers\FichasDeCaracterizacionController::class);
 Route::resource('aprendices', \App\Http\Controllers\AprendicesController::class);
 Route::resource('instructores', \App\Http\Controllers\InstructoresController::class);

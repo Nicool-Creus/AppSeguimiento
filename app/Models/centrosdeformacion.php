@@ -13,7 +13,7 @@ class centrosdeformacion extends Model
     protected $keyType = 'int';
 
     protected $fillable = [
-        'NIS', 'Codigo', 'Denominacion', 'Direccion', 'Observaciones'
+        'NIS', 'Codigo', 'Denominacion', 'Direccion', 'Observaciones', 'tblregionales_NIS'
     ];
     public $timestamps = false;
     public function regionales()

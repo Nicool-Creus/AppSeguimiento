@@ -7,7 +7,7 @@ use App\Models\instructores;
 use App\Models\rolesadministrativos;
 use App\Models\tiposdocumentos;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\validator;
 
 class InstructoresController extends Controller
 {
@@ -17,8 +17,7 @@ class InstructoresController extends Controller
     public function index()
     {
 
-        $instructores = DB::table('tblinstructores')
-            ->GET();
+        $instructores = instructores::with('tiposdocumentos', 'eps', 'rolesadministrativos')->get();
 
         return view('instructores.index', compact('instructores'));
 
@@ -32,11 +31,11 @@ class InstructoresController extends Controller
      */
     public function create()
     {
+        $tiposDocumentos = tiposdocumentos::all();
         $eps = eps::all();
         $rolesAdministrativos = rolesadministrativos::all();
-        $tiposDocumentos = tiposdocumentos::all();
 
-        return view('Instructores.create', compact('eps', 'rolesAdministrativos', 'tiposDocumentos'));
+        return view('Instructores.create', compact('tiposDocumentos', 'eps', 'rolesAdministrativos'));
     }
 
     /**
@@ -45,7 +44,7 @@ class InstructoresController extends Controller
     public function store(Request $request)
     {
         $v=validator::make($request->all(),[
-            'TipoDoc'=>['required'],
+            'tbltiposdocumentos_NIS'=>'required|exists:tbltiposdocumentos,NIS',
             'NumDoc'=>['required'],
             'Nombres'=>['required'],
             'Apellidos'=>['required'],
@@ -55,6 +54,8 @@ class InstructoresController extends Controller
             'CorreoPersonal'=>['required', 'email'],
             'Sexo'=>['required'],
             'FechaNac'=>['required', 'date'],
+            'tbleps_NIS'=>'required|exists:tbleps,NIS',
+            'tblrolesadministrativos_NIS'=>'required|exists:tblrolesadministrativos,NIS'
         ]);
         //dd($request->all());
 
@@ -63,7 +64,7 @@ class InstructoresController extends Controller
         }
 
         $input=$request->all();
-        $input['TipoDoc']=$input['TipoDoc'];
+        $input['tbltiposdocumentos_NIS']=$input['tbltiposdocumentos_NIS'];
         $input['NumDoc']=$input['NumDoc'];
         $input['Nombres']=$input['Nombres'];
         $input['Apellidos']=$input['Apellidos'];
@@ -73,6 +74,8 @@ class InstructoresController extends Controller
         $input['CorreoPersonal']=$input['CorreoPersonal'];
         $input['Sexo']=$input['Sexo'];
         $input['FechaNac']=$input['FechaNac'];
+        $input['tbleps_NIS']=$input['tbleps_NIS'];
+        $input['tblrolesadministrativos_NIS']=$input['tblrolesadministrativos_NIS'];
 
         instructores::create($input);
         //$successMsg="Aprendiz registrado correctamente";
@@ -84,9 +87,9 @@ class InstructoresController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $NIS)
+    public function show(int $NIS)
     {
-        $insructores = instructores::with(['rolesadministrativos', 'tiposdocumentos'])
+        $insructores = instructores::with([ 'tiposdocumentos', 'eps','rolesadministrativos'])
             ->find($NIS);
 
         if (!$insructores) {
@@ -100,7 +103,7 @@ class InstructoresController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $NIS)
+    public function edit(int $NIS)
     {
         $instructores = instructores::find($NIS);
 
@@ -109,17 +112,17 @@ class InstructoresController extends Controller
                 ->with('error', 'El ID no existe');
         }
 
+        $tiposDocumentos = tiposdocumentos::all();
         $eps = eps::all();
         $rolesAdministrativos = rolesadministrativos::all();
-        $tiposDocumentos = tiposdocumentos::all();
 
-        return view('Instructores.edit', compact('instructores', 'eps', 'rolesAdministrativos', 'tiposDocumentos'));
+        return view('Instructores.edit', compact('instructores', 'tiposDocumentos', 'eps', 'rolesAdministrativos'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $NIS)
+    public function update(Request $request, int $NIS)
     {
         $instructores = instructores::find($NIS);
 
@@ -129,7 +132,7 @@ class InstructoresController extends Controller
         }
 
         $request->validate([
-            'TipoDoc'=>'required',
+            'tbltiposdocumentos_NIS'=>'required',
             'NumDoc'=>'required',
             'Nombres'=>'required',
             'Apellidos'=>'required',
@@ -139,6 +142,8 @@ class InstructoresController extends Controller
             'CorreoPersonal'=>'required', 'email',
             'Sexo'=>'required',
             'FechaNac'=>'required', 'date',
+            'tbleps_NIS'=>'required',
+            'tblrolesadministrativos_NIS'=>'required'
         ]);
 
         $instructores->update($request->all());
@@ -150,7 +155,7 @@ class InstructoresController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $NIS)
+    public function destroy(int $NIS)
     {
         $instructores = instructores::find($NIS);
 

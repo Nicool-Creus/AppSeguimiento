@@ -33,11 +33,16 @@
     <div class="card-body">
         <div class="form-group row">
 
-            <label for="TipoDoc">Tipo de documento</label>
-            <select name="TipoDoc" id="TipoDoc" class="form-control" style="">
-                <option selected="selected" value="1">Cédula de ciudadania</option>
-                <option value="2">Tarjeta de identidad</option>
-            </select>
+            <div class="form-group col-md-3">
+                <label for="tbltiposdocumentos_NIS">Tipo de documento</label>
+                <select name="tbltiposdocumentos_NIS" class="form-control">
+                    @foreach($tiposDocumentos as $tipo)
+                        <option value="{{ $tipo->NIS }}">
+                            {{ $tipo->Denominacion }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
         </div>
 
         <div class="form-group col-md-3">
@@ -85,19 +90,18 @@
             @enderror
         </div>
 
-        <select name="tbltiposdocumentos_NIS" class="form-control">
-            @foreach($tiposDocumentos as $tipo)
-                <option value="{{ $tipo->NIS }}">
-                    {{ $tipo->Denominacion }}
-                </option>
-            @endforeach
-        </select>
     </div>
 
     <div class="form-group mt-3">
         <button type="submit" class="btn btn-primary">Registrar</button>
     </div>
 </form>
+
+<div class="mb-3">
+    <a href="{{ route('home') }}" class="btn btn-secondary">
+        ⬅ Volver al Inicio
+    </a>
+</div>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

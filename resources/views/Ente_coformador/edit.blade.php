@@ -39,15 +39,13 @@
         <div class="col-md-6 mb-3">
             <label>Tipo de documento</label>
 
-            <select name="TipoDoc" class="form-select @error('TipoDoc') is-invalid @enderror">
-                <option value="">Seleccione</option>
-                <option value="1" {{ old('TipoDoc', $enteCoformador->TipoDoc) == 1 ? 'selected' : '' }}>Cédula de ciudadanía</option>
-                <option value="2" {{ old('TipoDoc', $enteCoformador->TipoDoc) == 2 ? 'selected' : '' }}>Documento de identidad</option>
+            <select name="tbltiposdocumentos_NIS" class="form-control">
+                @foreach($tiposDocumentos as $tipo)
+                    <option value="{{ $tipo->NIS }}">
+                        {{ $tipo->Denominacion }}
+                    </option>
+                @endforeach
             </select>
-
-            @error('TipoDoc')
-            <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
         </div>
 
         <div class="col-md-6 mb-3">
@@ -67,31 +65,23 @@
         <div class="col-md-6 mb-3">
             <label>Dirección</label>
             <input type="text" name="Direccion"
-                   value="{{ old('Direccion', $aprendices->Direccion) }}"
+                   value="{{ old('Direccion', $enteCoformador->Direccion) }}"
                    class="form-control @error('Direccion') is-invalid @enderror">
         </div>
 
         <div class="col-md-6 mb-3">
             <label>Teléfono</label>
             <input type="text" name="Telefono"
-                   value="{{ old('Telefono', $aprendices->Telefono) }}"
+                   value="{{ old('Telefono', $enteCoformador->Telefono) }}"
                    class="form-control @error('Telefono') is-invalid @enderror">
         </div>
 
         <div class="col-md-6 mb-3">
             <label>Correo institucional</label>
             <input type="email" name="CorreoInstitucional"
-                   value="{{ old('CorreoInstitucional', $aprendices->CorreoInstitucional) }}"
+                   value="{{ old('CorreoInstitucional', $enteCoformador->CorreoInstitucional) }}"
                    class="form-control @error('CorreoInstitucional') is-invalid @enderror">
         </div>
-
-        <select name="tbltiposdocumentos_NIS" class="form-control">
-            @foreach($tiposDocumentos as $tipo)
-                <option value="{{ $tipo->NIS }}">
-                    {{ $tipo->Denominacion }}
-                </option>
-            @endforeach
-        </select>
 
     </div>
 

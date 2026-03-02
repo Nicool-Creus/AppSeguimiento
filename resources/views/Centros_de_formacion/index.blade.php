@@ -29,17 +29,17 @@
             <td>{{$centrosDeFormacion->Denominacion}}</td>
             <td>{{$centrosDeFormacion->Direccion}}</td>
             <td>{{$centrosDeFormacion->Observaciones}}</td>
-            <td>{{$centrosDeFormacion->Regioanles->Denominacion ?? 'Sin regional' }}</td>
+            <td>{{$centrosDeFormacion->regionales->Denominacion ?? 'Sin regional' }}</td>
 
             <td class="text-center">
 
-                <a href="{{ route('centrosFormacion.show', $centrosDeFormacion->NIS) }}"
+                <a href="{{ route('centroFormacion.show', $centrosDeFormacion->NIS) }}"
                    class="btn btn-info btn-sm">Ver</a>
 
-                <a href="{{ route('centrosFormacion.edit', $centrosDeFormacion->NIS) }}"
+                <a href="{{ route('centroFormacion.edit', $centrosDeFormacion->NIS) }}"
                    class="btn btn-info btn-sm">Actualizar</a>
 
-                <form action="{{ route('centrosFormacion.destroy', $centrosDeFormacions->NIS) }}"
+                <form action="{{ route('centroFormacion.destroy', $centrosDeFormacion->NIS) }}"
                       method="POST" style="display: inline;">
                     @csrf
                     @method('DELETE')
@@ -53,7 +53,7 @@
 </table>
 
 <div>
-    <a href="{{ route('centrosFormacion.create') }}"
+    <a href="{{ route('centroFormacion.create') }}"
        class="btn btn-info btn-sm">Registrar</a>
 </div>
 

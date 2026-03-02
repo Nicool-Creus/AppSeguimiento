@@ -33,10 +33,13 @@
     <div class="card-body">
         <div class="form-group row">
 
-            <label for="TipoDoc">Tipo de documento</label>
-            <select name="TipoDoc" id="TipoDoc" class="form-control" style="">
-                <option selected="selected" value="1">Cédula de ciudadania</option>
-                <option value="2">Tarjeta de identidad</option>
+            <label for="tbltiposdocumentos_NIS">Tipo de documento</label>
+            <select name="tbltiposdocumentos_NIS" class="form-control">
+                @foreach($tiposDocumentos as $tipo)
+                    <option value="{{ $tipo->NIS }}">
+                        {{ $tipo->Denominacion }}
+                    </option>
+                @endforeach
             </select>
         </div>
 
@@ -116,6 +119,7 @@
             <input type="date" class="form-control" name="FechaNac" id="FechaNac" placeholder="Fecha de nacimiento">
         </div>
 
+        <label for="tbleps_NIS">EPS</label>
         <select name="tbleps_NIS" class="form-control">
             @foreach($eps as $e)
                 <option value="{{ $e->NIS }}">
@@ -124,18 +128,11 @@
             @endforeach
         </select>
 
+        <label for="tblrolesadministrativos_NIS">Rol administrativo</label>
         <select name="tblrolesadministrativos_NIS" class="form-control">
             @foreach($rolesAdministrativos as $rol)
                 <option value="{{ $rol->NIS }}">
                     {{ $rol->Descripcion }}
-                </option>
-            @endforeach
-        </select>
-
-        <select name="tbltiposdocumentos_NIS" class="form-control">
-            @foreach($tiposDocumentos as $tipo)
-                <option value="{{ $tipo->NIS }}">
-                    {{ $tipo->Denominacion }}
                 </option>
             @endforeach
         </select>
@@ -146,6 +143,12 @@
         <button type="submit" class="btn btn-primary">Registrar</button>
     </div>
 </form>
+
+<div class="mb-3">
+    <a href="{{ route('home') }}" class="btn btn-secondary">
+        ⬅ Volver al Inicio
+    </a>
+</div>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

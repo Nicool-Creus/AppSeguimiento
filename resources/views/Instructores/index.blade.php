@@ -31,6 +31,8 @@
         <th style="text-align: center;" scope="col">Correo personal</th>
         <th style="text-align: center;" scope="col">Sexo</th>
         <th style="text-align: center;" scope="col">Fecha de nacimiento</th>
+        <th style="text-align: center;" scope="col">EPS</th>
+        <th style="text-align: center;" scope="col">Rol administrativo</th>
         <th style="text-align: center;" scope="col">Acciones</th>
     </tr>
     </thead>
@@ -38,7 +40,7 @@
 
     @foreach($instructores as $instructores)
         <tr>
-            <td>{{$instructores->TipoDoc}}</td>
+            <td>{{$instructores->tiposdocumentos->Denominacion}}</td>
             <td>{{$instructores->NumDoc}}</td>
             <td>{{$instructores->Nombres}}</td>
             <td>{{$instructores->Apellidos}}</td>
@@ -46,8 +48,10 @@
             <td>{{$instructores->Telefono}}</td>
             <td>{{$instructores->CorreoInstitucional}}</td>
             <td>{{$instructores->CorreoPersonal}}</td>
-            <td>{{$instructores->Sexo}}</td>
+            <td>{{$instructores->sexo_texto}}</td>
             <td>{{$instructores->FechaNac}}</td>
+            <td>{{$instructores->eps->Denominacion}}</td>
+            <td>{{$instructores->rolesadministrativos->Descripcion}}</td>
 
             <td class="text-center">
 

@@ -19,10 +19,8 @@
 <div> <a href="{{route('aprendices.index')}}">Consultar aprendices</a></div>
 <div> <a href="{{route('instructores.index')}}">Consultar instructores</a></div>
 <div> <a href="{{route('enteCoformador.index')}}">Consultar ente coformador</a></div>
-<div> <a href="{{route('centrosFormacion.index')}}">Consultar centros de formación</a></div>
+<div> <a href="{{route('centroFormacion.index')}}">Consultar centros de formación</a></div>
 <div> <a href="{{route('fichasCaracterizacion.index')}}">Consultar fichas de caracterización</a></div>
-
-<div> <a href="{{route('aprendices.create')}}">Registrar aprendices</a></div>
 
 </body>
 </html>

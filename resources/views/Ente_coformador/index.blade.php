@@ -27,7 +27,7 @@
 
     @foreach($enteCoformador as $enteCoformador)
         <tr>
-            <td>{{$enteCoformador->TipoDoc}}</td>
+            <td>{{$enteCoformador->tiposdocumentos->Denominacion}}</td>
             <td>{{$enteCoformador->NumDoc}}</td>
             <td>{{$enteCoformador->RazonSocial}}</td>
             <td>{{$enteCoformador->Direccion}}</td>
@@ -39,7 +39,7 @@
                 <a href="{{ route('enteCoformador.show', $enteCoformador->NIS) }}"
                    class="btn btn-info btn-sm">Ver</a>
 
-                <a href="{{ route('enteCoformador.update', $enteCoformador->NIS) }}"
+                <a href="{{ route('enteCoformador.edit', $enteCoformador->NIS) }}"
                    class="btn btn-info btn-sm">Actualizar</a>
 
                 <form action="{{ route('enteCoformador.destroy', $enteCoformador->NIS) }}"

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\centrosdeformacion;
 use App\Models\regionales;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class CentrosDeFormacionController extends Controller
@@ -16,10 +15,9 @@ class CentrosDeFormacionController extends Controller
     public function index()
     {
 
-        $centrosDeFormacion = DB::table('tblcentrosdeformacion')
-            ->GET();
+        $centrosDeFormacion = CentrosDeFormacion::with('regionales')->get();
 
-        return view('Centros_de_formacion.index.blade', compact('centrosDeFormacion'));
+        return view('Centros_de_formacion.index', compact('centrosDeFormacion'));
 
         //Otra forma:
         /*$centrosDeFormacion = CentrosDeFormacion::all();
@@ -45,6 +43,7 @@ class CentrosDeFormacionController extends Controller
             'Codigo'=>['required'],
             'Denominacion'=>['required'],
             'Direccion'=>['required'],
+            'tblregionales_NIS'=>'required|exists:tblregionales,NIS'
         ]);
         //dd($request->all());
 
@@ -57,17 +56,18 @@ class CentrosDeFormacionController extends Controller
         $input['Denominacion']=$input['Denominacion'];
         $input['Direccion']=$input['Direccion'];
         $input['Observaciones']=$input['Observaciones'];
+        $input['tblregionales_NIS']=$input['tblregionales_NIS'];
 
         centrosdeformacion::create($input);
 
-        return redirect()->route('centrosFormacion.create')->with('success', 'Centro registrado exitosamente');
+        return redirect()->route('centroFormacion.create')->with('success', 'Centro registrado exitosamente');
 
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $NIS)
+    public function show(int $NIS)
     {
         $centrosDeFormacion = centrosdeformacion::with(['regionales'])
             ->find($NIS);
@@ -83,16 +83,16 @@ class CentrosDeFormacionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $NIS)
+    public function edit(int $NIS)
     {
         $centrosDeFormacion = centrosdeformacion::find($NIS);
 
         if (!$centrosDeFormacion) {
-            return redirect()->route('centrosFormacion.index')
+            return redirect()->route('centroFormacion.index')
                 ->with('error', 'El NIS no existe');
         }
 
-        $regionales = regionales::find($NIS);
+        $regionales = regionales::all();
 
         return view('Centros_de_formacion.edit', compact('centrosDeFormacion', 'regionales'));
     }
@@ -100,12 +100,12 @@ class CentrosDeFormacionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $NIS)
+    public function update(Request $request, int $NIS)
     {
         $centrosDeFormacion = centrosdeformacion::find($NIS);
 
         if (!$centrosDeFormacion) {
-            return redirect()->route('centrosFormacion.index')
+            return redirect()->route('centroFormacion.index')
                 ->with('error', 'El NIS no existe');
         }
 
@@ -113,30 +113,30 @@ class CentrosDeFormacionController extends Controller
             'Codigo'=>'required',
             'Denominacion'=>'required',
             'Direccion'=>'required',
-            'Observaciones'=>'required',
+            'tblregionales_NIS'=>'required|exists:tblregionales,NIS'
         ]);
 
         $centrosDeFormacion->update($request->all());
 
-        return redirect()->route('centrosFormacion.index')
+        return redirect()->route('centroFormacion.index')
             ->with('success', 'Datos del centro actualizados correctamente');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $NIS)
+    public function destroy(int $NIS)
     {
         $centrosDeFormacion = centrosdeformacion::find($NIS);
 
         if (!$centrosDeFormacion) {
-            return redirect()->route('centrosFormacion.index')
+            return redirect()->route('centroFormacion.index')
                 ->with('error', 'El NIS no existe');
         }
 
         $centrosDeFormacion->delete();
 
-        return redirect()->route('centrosFormacion.index')
+        return redirect()->route('centroFormacion.index')
             ->with('success', 'El centro se ha eliminado correctamente');
     }
 }

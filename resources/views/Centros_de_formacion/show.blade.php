@@ -18,25 +18,18 @@
         <div class="card">
             <div class="card-body">
 
-                <p><strong>NIS:</strong> {{ $centrosDeFormacion->NIS }}</p>
-
-                <p><strong>Tipo Documento:</strong>
-                    {{ $aprendiz->regionales->Denominacion ?? 'No asignado' }}
-                </p>
-
                 <p><strong>Código:</strong> {{ $centrosDeFormacion->Codigo }}</p>
                 <p><strong>Denominación:</strong> {{ $centrosDeFormacion->Denominacion }}</p>
                 <p><strong>Dirección:</strong> {{ $centrosDeFormacion->Direccion }}</p>
                 <p><strong>Observaciones:</strong> {{ $centrosDeFormacion->Observaciones }}</p>
+                <p><strong>Regional:</strong>{{ $centrosDeFormacion->regionales->Denominacion ?? 'No asignado' }}</p>
 
             </div>
         </div>
 
         <br>
 
-        <a href="{{ route('centrosFormacion.index') }}" class="btn btn-secondary">
-            Volver
-        </a>
+        <a href="{{ route('centroFormacion.index') }}" class="btn btn-secondary">Volver</a>
 
     </div>
 

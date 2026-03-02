@@ -18,17 +18,7 @@
         <div class="card">
             <div class="card-body">
 
-                <p><strong>NIS:</strong> {{ $aprendiz->NIS }}</p>
-
-                <p><strong>Tipo Documento:</strong>
-                    {{ $aprendiz->tipoDocumento->Denominacion ?? 'No asignado' }}
-                </p>
-
-                <p><strong>EPS:</strong>
-                    {{ $aprendiz->eps->Denominacion ?? 'No asignada' }}
-                </p>
-
-                <p><strong>Tipo Doc:</strong> {{ $aprendiz->TipoDoc }}</p>
+                <p><strong>Tipo Documento:</strong>{{ $aprendiz->tiposdocumentos->Denominacion ?? 'No asignado' }}</p>
                 <p><strong>Número Documento:</strong> {{ $aprendiz->NumDoc }}</p>
                 <p><strong>Nombres:</strong> {{ $aprendiz->Nombres }}</p>
                 <p><strong>Apellidos:</strong> {{ $aprendiz->Apellidos }}</p>
@@ -36,8 +26,9 @@
                 <p><strong>Teléfono:</strong> {{ $aprendiz->Telefono }}</p>
                 <p><strong>Correo Institucional:</strong> {{ $aprendiz->CorreoInstitucional }}</p>
                 <p><strong>Correo Personal:</strong> {{ $aprendiz->CorreoPersonal }}</p>
-                <p><strong>Sexo:</strong> {{ $aprendiz->Sexo }}</p>
+                <p><strong>Sexo:</strong> {{ $aprendiz->sexo_texto }}</p>
                 <p><strong>Fecha Nacimiento:</strong> {{ $aprendiz->FechaNac }}</p>
+                <p><strong>EPS:</strong>{{ $aprendiz->eps->Denominacion ?? 'No asignada' }}</p>
 
             </div>
         </div>

@@ -118,19 +118,28 @@ class="d-inline" id="frmRegAprendiz">
             <input type="date" class="form-control" name="FechaNac" id="FechaNac" placeholder="Fecha de nacimiento">
         </div>
 
-        <select name="tbleps_NIS" class="form-control">
-            @foreach($eps as $e)
-                <option value="{{ $e->NIS }}">
-                    {{ $e->Denominacion }}
-                </option>
-            @endforeach
-        </select>
+        <div>
+            <label for="tbleps_NIS">EPS</label>
+            <select name="tbleps_NIS" class="form-control">
+                @foreach($eps as $e)
+                    <option value="{{ $e->NIS }}">
+                        {{ $e->Denominacion }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
     </div>
 
     <div class="form-group mt-3">
         <button type="submit" class="btn btn-primary">Registrar</button>
     </div>
 </form>
+
+<div class="mb-3">
+    <a href="{{ route('home') }}" class="btn btn-secondary">
+        ⬅ Volver al Inicio
+    </a>
+</div>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

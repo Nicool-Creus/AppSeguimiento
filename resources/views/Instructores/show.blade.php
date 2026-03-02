@@ -18,17 +18,7 @@
         <div class="card">
             <div class="card-body">
 
-                <p><strong>NIS:</strong> {{ $insructores->NIS }}</p>
-
-                <p><strong>Tipo Documento:</strong>
-                    {{ $insructores->tipoDocumento->Denominacion ?? 'No asignado' }}
-                </p>
-
-                <p><strong>Rol administrativo:</strong>
-                    {{ $insructores->rolAdministrativo->Descripcion ?? 'No asignada' }}
-                </p>
-
-                <p><strong>Tipo Doc:</strong> {{ $insructores->TipoDoc }}</p>
+                <p><strong>Tipo Documento:</strong>{{ $insructores->tiposdocumentos->Denominacion ?? 'No asignado' }}</p>
                 <p><strong>Número Documento:</strong> {{ $insructores->NumDoc }}</p>
                 <p><strong>Nombres:</strong> {{ $insructores->Nombres }}</p>
                 <p><strong>Apellidos:</strong> {{ $insructores->Apellidos }}</p>
@@ -36,8 +26,10 @@
                 <p><strong>Teléfono:</strong> {{ $insructores->Telefono }}</p>
                 <p><strong>Correo Institucional:</strong> {{ $insructores->CorreoInstitucional }}</p>
                 <p><strong>Correo Personal:</strong> {{ $insructores->CorreoPersonal }}</p>
-                <p><strong>Sexo:</strong> {{ $insructores->Sexo }}</p>
+                <p><strong>Sexo:</strong> {{ $insructores->sexo_texto }}</p>
                 <p><strong>Fecha Nacimiento:</strong> {{ $insructores->FechaNac }}</p>
+                <p><strong>EPS:</strong>{{ $insructores->eps->Denominacion ?? 'No asignada' }}</p>
+                <p><strong>Rol administrativo:</strong>{{ $insructores->rolesadministrativos->Descripcion ?? 'No asignada' }}</p>
 
             </div>
         </div>

@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class entecoformador extends Model
 {
     use HasFactory;
-    protected $table = 'tblentecoformador';
+    protected $table = 'tblentecoformadores';
     protected $primaryKey = 'NIS';
     protected $keyType = 'int';
 
     protected $fillable = [
-        'NIS', 'TipoDoc', 'NumDoc', 'RazonSocial', 'Direccion', 'Telefono', 'CorreoInstitucional'
+        'NIS', 'tbltiposdocumentos_NIS', 'NumDoc', 'RazonSocial', 'Direccion', 'Telefono', 'CorreoInstitucional'
     ];
     public $timestamps = false;
     public function tiposdocumentos()

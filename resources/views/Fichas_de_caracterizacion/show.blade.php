@@ -10,34 +10,21 @@
 </head>
 <body>
 
-@section('content')
-
     <div class="container">
         <h2>Detalle de la ficha</h2>
 
         <div class="card">
             <div class="card-body">
 
-                <p><strong>NIS:</strong> {{ $fichasDeCaracterizacion->NIS }}</p>
-
-                <p><strong>Aprendiz:</strong>
-                    {{ $fichasDeCaracterizacion->aprendiz->Nombres ?? 'No asignado' }}
-                </p>
-
-                <p><strong>Centro de formacióno:</strong>
-                    {{ $fichasDeCaracterizacion->fichasDeCaracterizacion->Denominacion ?? 'No asignada' }}
-                </p>
-
-                <p><strong>Programa:</strong>
-                    {{ $fichasDeCaracterizacion->programa->Denominacion ?? 'No asignado' }}
-                </p>
-
                 <p><strong>Código:</strong> {{ $fichasDeCaracterizacion->Codigo }}</p>
-                <p><strong>Denominación:</strong> {{ $fichasDeCaracterizacion->Demominacacion }}</p>
+                <p><strong>Denominación:</strong> {{ $fichasDeCaracterizacion->Denominacion }}</p>
                 <p><strong>Cupo:</strong> {{ $fichasDeCaracterizacion->Cupo }}</p>
                 <p><strong>Fecha de inicio:</strong> {{ $fichasDeCaracterizacion->FechaInicio }}</p>
                 <p><strong>Fecha de finalización:</strong> {{ $fichasDeCaracterizacion->FechaFin }}</p>
                 <p><strong>Observaciones:</strong> {{ $fichasDeCaracterizacion->Observaciones }}</p>
+                <p><strong>Aprendiz:</strong>{{ $fichasDeCaracterizacion->aprendiz->Nombres ?? 'No asignado' }}</p>
+                <p><strong>Centro de formacióno:</strong>{{ $fichasDeCaracterizacion->centrosdeformacion->Denominacion ?? 'No asignada' }}</p>
+                <p><strong>Programa:</strong>{{ $fichasDeCaracterizacion->programasdeformacion->Denominacion ?? 'No asignado' }}</p>
 
             </div>
         </div>

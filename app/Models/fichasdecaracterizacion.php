@@ -13,9 +13,13 @@ class fichasdecaracterizacion extends Model
     protected $keyType = 'int';
 
     protected $fillable = [
-        'NIS', 'Codigo', 'Denominacion', 'Cupo', 'FechaInicio', 'FechaFin', 'Observaciones'
+        'NIS', 'Codigo', 'Denominacion', 'Cupo', 'FechaInicio', 'FechaFin', 'Observaciones', 'tblaprendices_NIS', 'tblcentrosdeformacion_NIS', 'tblprogramasdeformacion_NIS'
     ];
     public $timestamps = false;
+    public function aprendiz()
+    {
+        return $this->belongsTo(aprendices::class,'tblaprendices_NIS','NIS');
+    }
     public function centrosdeformacion()
     {
         return $this->belongsTo(centrosdeformacion::class,'tblcentrosdeformacion_NIS','NIS');

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\TipoDocumento;
-use App\Models\Eps;
+use App\Models\tiposdocumentos;
+use App\Models\eps;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,13 +29,6 @@ class aprendices extends Model
     public function eps()
     {
         return $this->belongsTo(eps::class,'tbleps_NIS','NIS');
-    }
-    public function gettbltiposdocumentos_NISTextoAttribute()
-    {
-        return match ($this->tbltiposdocumentos_NIS) {
-            1 => 'Cédula de ciudadania',
-            2 => 'Tarjeta de identidad'
-        };
     }
     public function getSexoTextoAttribute()
     {

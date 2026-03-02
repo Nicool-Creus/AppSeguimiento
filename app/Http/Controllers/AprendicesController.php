@@ -27,7 +27,7 @@ class AprendicesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create()
     {
         $tiposDocumentos = tiposdocumentos::all();
         $eps = eps::all();
@@ -83,17 +83,17 @@ class AprendicesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $NIS)
+    public function show(int $NIS)
     {
-        $aprendiz = Aprendices::with(['tiposdocumentos', 'eps'])
-            ->get($NIS);
+        $aprendices = Aprendices::with(['tiposdocumentos', 'eps'])
+            ->find($NIS);
 
-        if (!$aprendiz) {
+        if (!$aprendices) {
             return redirect()->route('aprendices.index')
                 ->with('error', 'El NIS no existe');
         }
 
-        return view('Aprendices.show', compact('aprendiz'));
+        return view('Aprendices.show', compact('aprendices'));
     }
 
     /**
@@ -127,7 +127,7 @@ class AprendicesController extends Controller
         }
 
         $request->validate([
-            'TipoDoc'=>'required',
+            'tbltiposdocumentos_NIS'=>'required',
             'NumDoc'=>'required',
             'Nombres'=>'required',
             'Apellidos'=>'required',
@@ -137,7 +137,6 @@ class AprendicesController extends Controller
             'CorreoPersonal'=>'required', 'email',
             'Sexo'=>'required',
             'FechaNac'=>'required', 'date',
-            'tbltiposdocumentos_NIS'=>'required',
             'tbleps_NIS'=>'required'
         ]);
 

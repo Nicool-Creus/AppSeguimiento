@@ -58,10 +58,10 @@
         </div>
 
         <div class="col-md-6 mb-3">
-            <label>Fceha de inicio</label>
-            <input type="date" name="FcehaInicio"
-                   value="{{ old('FcehaInicio', $fichasDeCaracterizacion->FcehaInicio) }}"
-                   class="form-control @error('FcehaInicio') is-invalid @enderror">
+            <label>Fecha de inicio</label>
+            <input type="date" name="FechaInicio"
+                   value="{{ old('FechaInicio', $fichasDeCaracterizacion->FechaInicio) }}"
+                   class="form-control @error('FechaInicio') is-invalid @enderror">
         </div>
 
         <div class="col-md-6 mb-3">
@@ -77,6 +77,16 @@
                    value="{{ old('Observaciones', $fichasDeCaracterizacion->Observaciones) }}">
         </div>
 
+        <label>Aprendiz</label>
+        <select name="tblaprendices_NIS" class="form-control">
+            @foreach($aprendices as $aprendiz)
+                <option value="{{ $aprendiz->NIS }}">
+                    {{ $aprendiz->Nombres }}
+                </option>
+            @endforeach
+        </select>
+
+        <label>Centro de formación</label>
         <select name="tblcentrosdeformacion_NIS" class="form-control">
             @foreach($centrosDeFormacion as $centro)
                 <option value="{{ $centro->NIS }}">
@@ -85,6 +95,7 @@
             @endforeach
         </select>
 
+        <label>Programa de formación</label>
         <select name="tblprogramasdeformacion_NIS" class="form-control">
             @foreach($programas as $programa)
                 <option value="{{ $programa->NIS }}">

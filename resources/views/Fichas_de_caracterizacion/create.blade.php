@@ -81,6 +81,16 @@
             <input type="text" class="form-control" name="Observaciones" id="Observaciones" placeholder="Observaciones" value="{{old('Observaciones')}}">
         </div>
 
+        <label for="tblaprendices_NIS">Aprendiz</label>
+        <select name="tblaprendices_NIS" class="form-control">
+            @foreach($aprendices as $aprendiz)
+                <option value="{{ $aprendiz->NIS }}">
+                    {{ $aprendiz->Nombres }}
+                </option>
+            @endforeach
+        </select>
+
+        <label for="tblcentrosdeformacion_NIS">Centro de formación</label>
         <select name="tblcentrosdeformacion_NIS" class="form-control">
             @foreach($centrosDeFormacion as $centro)
                 <option value="{{ $centro->NIS }}">
@@ -89,6 +99,7 @@
             @endforeach
         </select>
 
+        <label for="tblprogramasdeformacion_NIS">Programa de formación</label>
         <select name="tblprogramasdeformacion_NIS" class="form-control">
             @foreach($programas as $programa)
                 <option value="{{ $programa->NIS }}">

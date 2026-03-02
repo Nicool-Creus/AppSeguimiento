@@ -32,13 +32,13 @@
 
     <div class="card-body">
 
-        <div class="form-group col-md-3">
+        <!--<div class="form-group col-md-3">
             <label for="Denominacion">Denominación</label>
-            <select name="Sexo" id="Denominacion" class="form-control" style="">
-                <option selected="selected" value="1">Masculino</option>
-                <option value="2">Femenino</option>
+            <select name="Denominacion" id="Denominacion" class="form-control" style="">
+                <option selected="selected" value="1">C.C</option>
+                <option value="2">I.D</option>
             </select>
-        </div>
+        </div>-->
 
         <div class="form-group col-md-3">
             <label for="Denominacion">Denominación</label>

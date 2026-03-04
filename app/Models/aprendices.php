@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\tiposdocumentos;
-use App\Models\eps;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

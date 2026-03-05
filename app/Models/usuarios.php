@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class usuarios extends Model
+class usuarios extends Authenticatable
 {
-    use HasFactory;
     protected $table = 'tblusuarios';
     protected $primaryKey = 'NIS';
     protected $keyType = 'int';
@@ -20,7 +18,6 @@ class usuarios extends Model
     protected $hidden = [
         'Contrasena'
     ];
-
     public function getAuthPassword()
     {
         return $this->Contrasena;

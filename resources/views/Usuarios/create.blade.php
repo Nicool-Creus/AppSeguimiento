@@ -30,34 +30,21 @@
                     @csrf
 
                     <div class="mb-3">
-                        <label class="form-label">NIS</label>
-                        <input type="number" name="NIS"
-                               class="form-control"
-                               value="{{ old('NIS') }}" required>
-                    </div>
-
-                    <div class="mb-3">
                         <label class="form-label">Correo Institucional</label>
-                        <input type="email" name="CorreoInstitucional"
-                               class="form-control"
-                               value="{{ old('CorreoInstitucional') }}" required>
+                        <input type="email" name="CorreoInstitucional" class="form-control" value="{{ old('CorreoInstitucional') }}" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Contraseña</label>
-                        <input type="password" name="password"
-                               class="form-control" required>
+                        <input type="password" name="password" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Confirmar Contraseña</label>
-                        <input type="password" name="password_confirmation"
-                               class="form-control" required>
+                        <input type="password" name="password_confirmation" class="form-control" required>
                     </div>
 
-                    <button type="submit" class="btn btn-success w-100">
-                        Registrar
-                    </button>
+                    <button type="submit" class="btn btn-success w-100">Registrar</button>
 
                 </form>
 

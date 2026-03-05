@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\usuarios;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -19,20 +21,24 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        $credenciales = [
-            'CorreoInstitucional' => $request->CorreoInstitucional,
-            'password' => $request->password
-        ];
+        $usuario = usuarios::where('CorreoInstitucional', $request->CorreoInstitucional)->first();
 
-        if (Auth::attempt($credenciales)) {
-            $request->session()->regenerate();
-            return redirect()->route('home')
-                ->with('success', 'Bienvenido');
+        if (!$usuario) {
+            return back()->withErrors([
+                'CorreoInstitucional' => 'El correo no existe'
+            ])->onlyInput('CorreoInstitucional');
         }
 
-        return back()->withErrors([
-            'CorreoInstitucional' => 'Credenciales incorrectas'
-        ])->onlyInput('CorreoInstitucional');
+        if (!Hash::check($request->password, $usuario->Contrasena)) {
+            return back()->withErrors([
+                'password' => 'La contraseña es incorrecta'
+            ])->onlyInput('CorreoInstitucional');
+        }
+
+        Auth::login($usuario);
+        $request->session()->regenerate();
+
+        return redirect()->route('home')->with('success', 'Bienvenido al sistema');
     }
 
     public function logout(Request $request)

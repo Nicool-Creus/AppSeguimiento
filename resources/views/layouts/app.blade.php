@@ -22,7 +22,7 @@
 <div> <a href="{{route('centroFormacion.index')}}">Consultar centros de formación</a></div>
 <div> <a href="{{route('fichasCaracterizacion.index')}}">Consultar fichas de caracterización</a></div>
 <div> <a href="{{route('bitacoras.create')}}">Subir bitácora</a></div>
-<div> <a href="{{route('bitacoras.show')}}">Ver estado de bitácoras</a></div>
+<div> <a href="{{route('bitacoras.index')}}">Ver estado de bitácoras</a></div>
 
 </body>
 </html>

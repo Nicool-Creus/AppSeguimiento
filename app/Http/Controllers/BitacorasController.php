@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\bitacoras;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\validator;
 
 class BitacorasController extends Controller
@@ -13,7 +14,8 @@ class BitacorasController extends Controller
      */
     public function index()
     {
-        //
+        $bitacoras = bitacoras::where('tblusuarios_NIS', Auth::user()->NIS)->get();
+        return view('bitacoras.index', compact('bitacoras'));
     }
 
     /**
@@ -33,15 +35,18 @@ class BitacorasController extends Controller
             'Archivo'=>['required'],]);
 
         //Crear el nombre del archivo
-        $archivo = 'bitacora'.time().'.'.$request->file('archivo')->extension();
+        $archivo = 'bitacora_'.time().'.'.$request->file('Archivo')->extension();
 
         //Guardar el archivo
-        $request->file('archivo')->move(public_path('/uploads/aprendices/'), $archivo);
+        $request->file('Archivo')->move(public_path('/uploads/aprendices/'), $archivo);
 
         $bitacora = new bitacoras();
         $bitacora->Archivo = $archivo;
         $bitacora->Estado = 'Creada';
+        $bitacora->tblusuarios_NIS = Auth::user()->NIS;
         $bitacora->save();
+
+        return redirect()->route('bitacoras.index')->with('success', 'Bitácora registrada exitosamente');
     }
 
     /**
@@ -49,10 +54,10 @@ class BitacorasController extends Controller
      */
     public function show(int $NIS)
     {
-        $bitacoras = Bitacoras::with(['usuarios'])
+        /*$bitacoras = Bitacoras::with(['usuarios'])
             ->find($NIS);
 
-        return view('bitacoras.show', compact('bitacoras'));
+        return view('bitacoras.show', compact('bitacoras'));*/
     }
 
     /**

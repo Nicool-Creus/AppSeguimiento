@@ -12,10 +12,8 @@ class bitacoras extends Model
     protected $primaryKey = 'NIS';
     protected $keyType = 'int';
 
-    public $timestamps = false;
-
     protected $fillable = [
-        'NIS', 'Archivo', 'Estado', 'create_at', 'update_at', 'tblusuarios_NIS'
+        'NIS', 'Archivo', 'Estado', 'created_at', 'updated_at', 'tblusuarios_NIS'
     ];
 
     public function usuarios()

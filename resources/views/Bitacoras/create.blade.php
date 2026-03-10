@@ -20,8 +20,6 @@
         </div>
     </td>
 
-
-
     <button type="submit" class="btn btn-primary">Guardar</button>
 </form>
 

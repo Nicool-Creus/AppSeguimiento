@@ -1,88 +1,132 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Aprendices</title>
-</head>
-<body>
+@extends('layouts.diseñoVistas')
 
-@if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
+@section('title','Aprendices')
+
+@section('content')
+
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <h3 class="mb-4">Aprendices</h3>
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover">
+
+                    <thead class="table-light">
+                    <tr>
+                        <th class="text-center">Tipo de documento</th>
+                        <th class="text-center">Número de documento</th>
+                        <th class="text-center">Nombres</th>
+                        <th class="text-center">Apellidos</th>
+                        <th class="text-center">Dirección</th>
+                        <th class="text-center">Teléfono</th>
+                        <th class="text-center">Correo institucional</th>
+                        <th class="text-center">Correo personal</th>
+                        <th class="text-center">Sexo</th>
+                        <th class="text-center">Fecha de nacimiento</th>
+                        <th class="text-center">EPS</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    @forelse($aprendices as $aprendiz)
+
+                        <tr>
+
+                            <td>{{$aprendiz->tiposdocumentos->Denominacion ?? 'No tiene'}}</td>
+
+                            <td>{{$aprendiz->NumDoc}}</td>
+
+                            <td>{{$aprendiz->Nombres}}</td>
+
+                            <td>{{$aprendiz->Apellidos}}</td>
+
+                            <td>{{$aprendiz->Direccion}}</td>
+
+                            <td>{{$aprendiz->Telefono}}</td>
+
+                            <td>{{$aprendiz->CorreoInstitucional}}</td>
+
+                            <td>{{$aprendiz->CorreoPersonal}}</td>
+
+                            <td>{{$aprendiz->sexo_texto}}</td>
+
+                            <td>{{$aprendiz->FechaNac}}</td>
+
+                            <td>{{$aprendiz->eps->Denominacion ?? 'Sin EPS'}}</td>
+
+                            <td class="text-center">
+
+                                <a href="{{ route('aprendices.show', $aprendiz->NIS) }}"
+                                   class="btn btn-primary btn-sm">
+                                    Ver
+                                </a>
+
+                                <a href="{{ route('aprendices.edit', $aprendiz->NIS) }}"
+                                   class="btn btn-warning btn-sm">
+                                    Actualizar
+                                </a>
+
+                                <form action="{{ route('aprendices.destroy', $aprendiz->NIS) }}"
+                                      method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit"
+                                            class="btn btn-danger btn-sm"
+                                            onclick="return confirm('¿Está seguro de eliminar este registro?')">
+
+                                        Eliminar
+
+                                    </button>
+
+                                </form>
+
+                            </td>
+
+                        </tr>
+
+                    @empty
+
+                        <tr>
+                            <td colspan="12" class="text-center">
+                                No hay aprendices registrados
+                            </td>
+                        </tr>
+
+                    @endforelse
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="mt-3">
+
+                <a href="{{ route('aprendices.create') }}"
+                   class="btn btn-success">
+                    Registrar aprendiz
+                </a>
+
+                <a href="{{ route('home') }}"
+                   class="btn btn-secondary">
+                    Volver al inicio
+                </a>
+
+            </div>
+
+        </div>
     </div>
-@endif
 
-<h1 style="text-align: center;">Consultar aprendices</h1>
-
-<table class="table table-bordered table-hover">
-    <thead>
-    <tr>
-        <th style="text-align: center;" scope="col">Tipo de documento</th>
-        <th style="text-align: center;" scope="col">Número de documento</th>
-        <th style="text-align: center;" scope="col">Nombres</th>
-        <th style="text-align: center;" scope="col">Apellidos</th>
-        <th style="text-align: center;" scope="col">Dirección</th>
-        <th style="text-align: center;" scope="col">Teléfono</th>
-        <th style="text-align: center;" scope="col">Correo institucional</th>
-        <th style="text-align: center;" scope="col">Correo personal</th>
-        <th style="text-align: center;" scope="col">Sexo</th>
-        <th style="text-align: center;" scope="col">Fecha de nacimiento</th>
-        <th style="text-align: center;" scope="col">EPS</th>
-    </tr>
-    </thead>
-    <tbody>
-
-    @foreach($aprendices as $aprendices)
-        <tr>
-            <td>{{$aprendices->tiposdocumentos->Denominacion ?? 'No tiene'}}</td>
-            <td>{{$aprendices->NumDoc}}</td>
-            <td>{{$aprendices->Nombres}}</td>
-            <td>{{$aprendices->Apellidos}}</td>
-            <td>{{$aprendices->Direccion}}</td>
-            <td>{{$aprendices->Telefono}}</td>
-            <td>{{$aprendices->CorreoInstitucional}}</td>
-            <td>{{$aprendices->CorreoPersonal}}</td>
-            <td>{{$aprendices->sexo_texto}}</td>
-            <td>{{$aprendices->FechaNac}}</td>
-            <td>{{$aprendices->eps->Denominacion ?? 'Sin EPS'}}</td>
-
-            <td class="text-center">
-
-                <a href="{{ route('aprendices.show', $aprendices->NIS) }}"
-                   class="btn btn-info btn-sm">Ver</a>
-
-                <a href="{{ route('aprendices.edit', $aprendices->NIS) }}"
-                   class="btn btn-info btn-sm">Actualizar</a>
-
-                <form action="{{ route('aprendices.destroy', $aprendices->NIS) }}"
-                      method="POST" style="display: inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de querer eliminar este registro?')">Eliminar</button>
-                </form>
-            </td>
-        </tr>
-    @endforeach
-
-    </tbody>
-</table>
-
-<div>
-    <a href="{{ route('aprendices.create') }}"
-       class="btn btn-info btn-sm">Registrar</a>
-</div>
-
-<div class="mb-3">
-    <a href="{{ route('home') }}" class="btn btn-secondary">
-        ⬅ Volver al Inicio
-    </a>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-</body>
-</html>
+@endsection

@@ -22,7 +22,7 @@ class AprendicesMail extends Mailable
         $this->accion = $accion;
         $this->cambios = $cambios;
     }
-
+//
     public function build()
     {
         return $this->subject($this->asunto,'Notificación')->view('Correo.correoAprendices');

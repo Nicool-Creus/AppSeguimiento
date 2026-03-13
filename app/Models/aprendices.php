@@ -42,26 +42,33 @@ class aprendices extends Model
     //Enviar correo cuando se cree, atualice o borre algún dato del aprendiz
     protected static function booted()
     {
-        static::created(function ($aprendices) {
-           Mail::to(config('mail.from.address'))
-           ->send(new AprendicesMail($aprendices, 'Registro de aprendiz'));
+        //Se envía un correo cuando se registra un aprendiz
+        static::created(function ($aprendiz) {
+           Mail::to($aprendiz->CorreoInstitucional)
+           ->send(new AprendicesMail($aprendiz, 'Registro de aprendiz'));
         });
-        static::updated(function ($aprendices) {
+
+        //Cuando se actualizan los datos del aprendiz
+        static::updated(function ($aprendiz) {
             $cambios=[];
 
-            foreach ($aprendices->getChanges() as $campo => $valorNuevo) {
+            foreach ($aprendiz->getChanges() as $campo => $valorNuevo) {
                 if ($campo != 'updated_at') {
-                    $valorViejo = $aprendices->getOriginal($campo);
-                    $cambios[$campo]= [
+                    $valorViejo = $aprendiz->getOriginal($campo);
+                    $cambios[$campo] = [
                         'Antes' => $valorViejo,
                         'Después' => $valorNuevo,
                     ];
                 }
             }
-            Mail::to(config('mail.from.address'))->send(new AprendicesMail($aprendices, 'Datos del aprendiz actualizados', $cambios));
+            if (!empty($cambios)) {
+                Mail::to($aprendiz->CorreoInstitucional)->send(new AprendicesMail($aprendiz, 'Datos del aprendiz actualizados', $cambios));
+            }
         });
-        static::deleted(function ($aprendices) {
-            Mail::to(config('mail.from.address'))->send(new AprendicesMail($aprendices, 'Datos del aprendiz eliminados'));
+
+        //Cuando se elimina un registro
+        static::deleted(function ($aprendiz) {
+            Mail::to($aprendiz->CorreoInstitucional)->send(new AprendicesMail($aprendiz, 'Datos del aprendiz eliminados'));
         });
     }
 }

@@ -5,7 +5,23 @@ namespace App\Mail;
 use Illuminate\Mail\Mailable;
 
 
-class AprendicesMail extends Mailable
+class CrearContrasenaAuxiliarMail extends Mailable
+{
+    public $token;
+
+    public function __construct($token)
+    {
+        $this->token = $token;
+    }
+
+    public function build()
+    {
+        return $this->subject('Crear contraseña')
+            ->view('Correo.correo_Crear_Contrasena_Auxiliar');
+    }
+}
+
+/*class CrearContrasenaAuxiliarMail extends Mailable
 {
     public $aprendiz;
     public $asunto;
@@ -25,4 +41,4 @@ class AprendicesMail extends Mailable
                 'cambios' => $this->cambios]);
     }
 
-}
+}*/

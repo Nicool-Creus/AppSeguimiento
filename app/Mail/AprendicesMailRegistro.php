@@ -18,6 +18,6 @@ class AprendicesMailRegistro extends Mailable
     public function build()
     {
         return $this->subject('Registro en la plataforma')
-            ->view('Correo.correoAprendices');
+            ->view('Correo.correo_Crear_Contrasena_Auxiliar');
     }
 }

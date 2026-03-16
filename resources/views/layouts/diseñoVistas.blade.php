@@ -132,6 +132,10 @@
         <i class="bi bi-file-earmark-text"></i> Estado Bitácoras
     </a>
 
+    <a href="{{ route('usuarios.create') }}">
+        <i class="bi bi-file-earmark-text"></i> Crear usuario
+    </a>
+
 </div>
 
 

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Mail\AprendicesMail;
+use App\Mail\CrearContrasenaAuxiliarMail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
@@ -45,7 +45,7 @@ class aprendices extends Model
         //Se envía un correo cuando se registra un aprendiz
         static::created(function ($aprendiz) {
            Mail::to($aprendiz->CorreoInstitucional)
-           ->send(new AprendicesMail($aprendiz, 'Registro de aprendiz'));
+           ->send(new CrearContrasenaAuxiliarMail($aprendiz, 'Registro de aprendiz'));
         });
 
         //Cuando se actualizan los datos del aprendiz
@@ -62,13 +62,13 @@ class aprendices extends Model
                 }
             }
             if (!empty($cambios)) {
-                Mail::to($aprendiz->CorreoInstitucional)->send(new AprendicesMail($aprendiz, 'Datos del aprendiz actualizados', $cambios));
+                Mail::to($aprendiz->CorreoInstitucional)->send(new CrearContrasenaAuxiliarMail($aprendiz, 'Datos del aprendiz actualizados', $cambios));
             }
         });
 
         //Cuando se elimina un registro
         static::deleted(function ($aprendiz) {
-            Mail::to($aprendiz->CorreoInstitucional)->send(new AprendicesMail($aprendiz, 'Datos del aprendiz eliminados'));
+            Mail::to($aprendiz->CorreoInstitucional)->send(new CrearContrasenaAuxiliarMail($aprendiz, 'Datos del aprendiz eliminados'));
         });
     }
 }

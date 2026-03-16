@@ -13,7 +13,7 @@ class usuarios extends Authenticatable
     public $timestamps = false;
 
     protected $fillable = [
-        'NIS', 'CorreoInstitucional', 'Contrasena'
+        'NIS', 'CorreoInstitucional', 'Contrasena', 'TokenContrasena', 'tblaprendices_NIS', 'tblrolesadministrativos_NIS'
     ];
     protected $hidden = [
         'Contrasena'

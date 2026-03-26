@@ -11,11 +11,13 @@ class alternativasep extends Model
     protected $keyType = 'int';
 
     protected $fillable = [
-        'NIS', 'Archivo', 'Estado', 'created_at', 'updated_at', 'tblusuarios_NIS'
+        'NIS', 'TipoAlternativa'
     ];
 
-    public function usuarios()
+    public $timestamps = false;
+
+    public function subtipos()
     {
-        return $this->belongsTo(usuarios::class,'tblusuarios_NIS','NIS');
+        return $this->hasMany(subtipoalternativa::class, 'tblalternativasep.NIS', 'NIS');
     }
 }

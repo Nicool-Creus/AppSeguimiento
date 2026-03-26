@@ -63,21 +63,20 @@ class InstructoresController extends Controller
             return back()->withErrors($v)->withInput();
         }
 
-        $input=$request->all();
-        $input['tbltiposdocumentos_NIS']=$input['tbltiposdocumentos_NIS'];
-        $input['NumDoc']=$input['NumDoc'];
-        $input['Nombres']=$input['Nombres'];
-        $input['Apellidos']=$input['Apellidos'];
-        $input['Direccion']=bcrypt($input['Direccion']);
-        $input['Telefono']=$input['Telefono'];
-        $input['CorreoInstitucional']=$input['CorreoInstitucional'];
-        $input['CorreoPersonal']=$input['CorreoPersonal'];
-        $input['Sexo']=$input['Sexo'];
-        $input['FechaNac']=$input['FechaNac'];
-        $input['tbleps_NIS']=$input['tbleps_NIS'];
-        $input['tblrolesadministrativos_NIS']=$input['tblrolesadministrativos_NIS'];
-
-        instructores::create($input);
+        instructores::create([
+            'tbltiposdocumentos_NIS' => $request->tbltiposdocumentos_NIS,
+            'NumDoc'=>$request->NumDoc,
+            'Nombres'=>$request->Nombres,
+            'Apellidos'=>$request->Apellidos,
+            'Direccion'=>$request->Direccion,
+            'Telefono'=>$request->Telefono,
+            'CorreoInstitucional'=>$request->CorreoInstitucional,
+            'CorreoPersonal'=>$request->CorreoPersonal,
+            'Sexo'=>$request->Sexo,
+            'FechaNac'=>$request->FechaNac,
+            'tbleps_NIS'=>$request->tbleps_NIS,
+            'tblrolesadministrativos_NIS'=>$request->tblrolesadministrativos_NIS
+        ]);
         //$successMsg="Aprendiz registrado correctamente";
         //Alert::success('Aprendices registrado correctamente');
 

@@ -36,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('instructores', \App\Http\Controllers\InstructoresController::class);
     Route::resource('aprendices', \App\Http\Controllers\AprendicesController::class);
     Route::resource('bitacoras', \App\Http\Controllers\BitacorasController::class);
+    Route::resource('alternativasEp', \App\Http\Controllers\AlternativasEpController::class);
+    Route::resource('subtipoAlternativa', \App\Http\Controllers\SubtipoAlternativaController::class);
 });
 
 

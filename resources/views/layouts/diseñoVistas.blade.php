@@ -132,9 +132,14 @@
         <i class="bi bi-file-earmark-text"></i> Estado Bitácoras
     </a>
 
-    <a href="{{ route('usuarios.create') }}">
-        <i class="bi bi-file-earmark-text"></i> Crear usuario
+    <a href="{{ route('alternativasEp.index') }}">
+        <i class="bi bi-file-earmark-text"></i> Registrar alternativas
     </a>
+
+    <a href="{{ route('subtipoAlternativa.index') }}">
+        <i class="bi bi-file-earmark-text"></i> Registrar subtipo de alternativas
+    </a>
+
 
     <a href="{{ route('usuarios.create') }}">
         <i class="bi bi-file-earmark-text"></i> Crear auxiliar

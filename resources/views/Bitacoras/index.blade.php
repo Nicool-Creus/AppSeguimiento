@@ -1,51 +1,77 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Consultar bitácoras</title>
-</head>
-<body>
+@extends('layouts.diseñoVistas')
 
-<div class="container mt-4">
+@section('title','Bitácoras')
 
-    <h3>Estado de Bitácoras</h3>
+@section('content')
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>NIS</th>
-            <th>Archivo</th>
-            <th>Fecha de creación</th>
-            <th>Estado</th>
-        </tr>
-        </thead>
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 
-        <tbody>
+    <div class="card">
 
-        @foreach($bitacoras as $bitacora)
+        <div class="card-body">
 
-            <tr>
-                <td>{{ $bitacora->NIS }}</td>
+            <h3 class="mb-4">Bitácoras</h3>
 
-                <td>
-                    <a href="{{ asset('uploads/aprendices/'.$bitacora->Archivo) }}" target="_blank">
-                        {{ $bitacora->Archivo }}
-                    </a>
-                </td>
-                <td>{{ $bitacora->created_at }}</td>
+            <div class="table-responsive">
 
-                <td>{{ $bitacora->Estado }}</td>
-            </tr>
+                <table class="table table-bordered table-hover">
 
-        @endforeach
+                    <thead class="table-light">
+                    <tr>
+                        <th class="text-center">Archivo</th>
+                        <th class="text-center">Fecha de creación</th>
+                        <th class="text-center">Estado</th>
+                    </tr>
+                    </thead>
 
-        </tbody>
-    </table>
+                    <tbody>
 
-</div>
-</body>
-</html>
+                    @forelse($bitacoras as $bitacora)
+
+                        <tr>
+
+                            <td>
+                                <a href="{{ asset('uploads/aprendices/'.$bitacora->Archivo) }}" target="_blank">
+                                    {{ $bitacora->Archivo }}
+                                </a>
+                            </td>
+
+                            <td class="text-center">{{$bitacora->created_at }}</td>
+
+                            <td class="text-center">{{$bitacora->Estado}}</td>
+
+                        </tr>
+
+                    @empty
+
+                        <tr>
+                            <td colspan="12" class="text-center">
+                                No hay bitácoras registradas
+                            </td>
+                        </tr>
+
+                    @endforelse
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="mt-3">
+
+                <a href="{{ route('home') }}"
+                   class="btn btn-secondary">
+                    Volver al inicio
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+
+@endsection

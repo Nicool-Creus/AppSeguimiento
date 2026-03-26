@@ -46,11 +46,10 @@ class TiposDocumentosController extends Controller
             return back()->withErrors($v)->withInput();
         }
 
-        $input=$request->all();
-        $input['Denominacion']=$input['Denominacion'];
-        $input['Observaciones']=$input['Observaciones'];
-
-        tiposdocumentos::create($input);
+        tiposdocumentos::create([
+            'Denominacion' => $request->Denominacion,
+            'Observaciones'=>$request->Observaciones
+        ]);
 
         return redirect()->route('tiposDocumentos.index')->with('success', 'Documento registrado exitosamente');
 

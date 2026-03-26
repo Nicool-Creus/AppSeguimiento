@@ -1,70 +1,77 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Actualizar programa</title>
-</head>
-<body class="container mt-4">
+@extends('layouts.diseñoVistas')
 
-<h1 class="text-center mb-4">Actualizar Programa</h1>
+@section('title','Actualizar programa')
 
-<!--MENSAJE ERROR GENERAL-->
-@if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
+@section('content')
 
-<!--ERRORES DE VALIDACIÓN-->
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul class="mb-0">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+    <div class="card">
 
-<form action="{{ route('programas.update', $programas->NIS) }}" method="POST">
-    @csrf
-    @method('PUT')
+        <div class="card-body">
 
-    <div class="row">
+            <h3 class="mb-4">Actualizar programa</h3>
 
-        <div class="col-md-6 mb-3">
-            <label>Código</label>
-            <input type="number" name="Codigo"
-                   value="{{ old('Codigo', $programas->Codigo) }}"
-                   class="form-control @error('Codigo') is-invalid @enderror">
+            <!-- MENSAJE ERROR GENERAL -->
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+
+            <!-- ERRORES DE VALIDACIÓN -->
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('programas.update', $programas->NIS) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label>Código</label>
+                        <input type="number" name="Codigo"
+                               value="{{ old('Codigo', $programas->Codigo) }}"
+                               class="form-control @error('Codigo') is-invalid @enderror">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label>Denominación</label>
+                        <input type="text" name="Denominacion"
+                               value="{{ old('Denominacion', $programas->Denominacion) }}"
+                               class="form-control @error('Denominacion') is-invalid @enderror">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label>Observaciones</label>
+                        <input type="text" name="Observaciones"
+                               value="{{ old('Observaciones', $programas->Observaciones) }}"
+                               class="form-control">
+                    </div>
+
+                </div>
+
+                <div class="mt-3">
+
+                    <button type="submit" class="btn btn-warning">
+                        Actualizar programa
+                    </button>
+
+                    <a href="{{ route('programas.index') }}" class="btn btn-secondary">
+                        Volver
+                    </a>
+
+                </div>
+            </form>
+
         </div>
 
-        <div class="col-md-6 mb-3">
-            <label>Denominación</label>
-            <input type="text" name="Denominacion"
-                   value="{{ old('Denominacion', $programas->Denominacion) }}"
-                   class="form-control @error('Denominacion') is-invalid @enderror">
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Observaciones</label>
-            <input type="text" name="Observaciones"
-                   value="{{ old('Observaciones', $programas->Observaciones) }}">
-        </div>
-
     </div>
 
-    <div class="text-center mt-3">
-        <button type="submit" class="btn btn-warning">Actualizar</button>
-        <a href="{{ route('programas.index') }}" class="btn btn-secondary">Volver</a>
-    </div>
-
-</form>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+@endsection

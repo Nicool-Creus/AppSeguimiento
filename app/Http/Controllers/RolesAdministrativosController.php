@@ -47,10 +47,9 @@ class RolesAdministrativosController extends Controller
             return back()->withErrors($v)->withInput();
         }
 
-        $input=$request->all();
-        $input['Descripcion']=$input['Descripcion'];
-
-        rolesadministrativos::create($input);
+        rolesadministrativos::create([
+            'Descripcion' => $request->Descripcion,
+        ]);
 
         return redirect()->route('rolesAdministrativos.index')->with('success', 'Rol registrado exitosamente');
 

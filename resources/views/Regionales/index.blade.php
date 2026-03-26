@@ -1,65 +1,108 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>INDEX</title>
-</head>
-<body>
-<h1 style="text-align: center;">Regionales</h1>
+@extends('layouts.diseñoVistas')
 
-<table class="table table-bordered table-hover">
-    <thead>
-    <tr>
-        <th style="text-align: center;" scope="col">Código</th>
-        <th style="text-align: center;" scope="col">Denominación</th>
-        <th style="text-align: center;" scope="col">Observaciones</th>
-    </tr>
-    </thead>
-    <tbody>
+@section('title','Regionales')
 
-    @foreach($regionales as $regionales)
-        <tr>
-            <td>{{$regionales->Codigo}}</td>
-            <td>{{$regionales->Denominacion}}</td>
-            <td>{{$regionales->Observaciones}}</td>
+@section('content')
 
-            <td class="text-center">
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 
-                <a href="{{ route('regionales.show', $regionales->NIS) }}"
-                   class="btn btn-info btn-sm">Ver</a>
+    <div class="card">
 
-                <a href="{{ route('regionales.edit', $regionales->NIS) }}"
-                   class="btn btn-info btn-sm">Actualizar</a>
+        <div class="card-body">
 
-                <form action="{{ route('regionales.destroy', $regionales->NIS) }}"
-                      method="POST" style="display: inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de querer eliminar este registro?')">Eliminar</button>
-                </form>
-            </td>
-        </tr>
-    @endforeach
+            <h3 class="mb-4">Regionales</h3>
 
-    </tbody>
-</table>
+            <div class="table-responsive">
 
-<div>
-    <a href="{{ route('regionales.create') }}"
-       class="btn btn-info btn-sm">Registrar</a>
-</div>
+                <table class="table table-bordered table-hover">
 
-<div class="mb-3">
-    <a href="{{ route('home') }}" class="btn btn-secondary">
-        ⬅ Volver al Inicio
-    </a>
-</div>
+                    <thead class="table-light">
+                    <tr>
+                        <th class="text-center">Código</th>
+                        <th class="text-center">Denominación</th>
+                        <th class="text-center">Observaciones</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                    </thead>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+                    <tbody>
 
-</body>
-</html>
+                    @forelse($regionales as $regional)
+
+                        <tr>
+
+                            <td>{{$regional->Codigo}}</td>
+
+                            <td>{{$regional->Denominacion}}</td>
+
+                            <td>{{$regional->Observaciones}}</td>
+
+                            <td class="text-center">
+
+                                <a href="{{ route('regionales.show', $regional->NIS) }}"
+                                   class="btn btn-primary btn-sm">
+                                    Ver
+                                </a>
+
+                                <a href="{{ route('regionales.edit', $regional->NIS) }}"
+                                   class="btn btn-warning btn-sm">
+                                    Actualizar
+                                </a>
+
+                                <form action="{{ route('regionales.destroy', $regional->NIS) }}"
+                                      method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit"
+                                            class="btn btn-danger btn-sm"
+                                            onclick="return confirm('¿Está seguro de eliminar este registro?')">
+
+                                        Eliminar
+
+                                    </button>
+
+                                </form>
+
+                            </td>
+
+                        </tr>
+
+                    @empty
+
+                        <tr>
+                            <td colspan="12" class="text-center">
+                                No hay regionales registradas
+                            </td>
+                        </tr>
+
+                    @endforelse
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="mt-3">
+
+                <a href="{{ route('regionales.create') }}"
+                   class="btn btn-success">
+                    Registrar regional
+                </a>
+
+                <a href="{{ route('home') }}"
+                   class="btn btn-secondary">
+                    Volver al inicio
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+
+@endsection

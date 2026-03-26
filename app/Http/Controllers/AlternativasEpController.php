@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\alternativasep;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class AlternativasEpController extends Controller
@@ -12,7 +14,11 @@ class AlternativasEpController extends Controller
      */
     public function index()
     {
-        //
+
+        $alternativas = DB::table('tblalternativasep')
+            ->GET();
+
+        return view('Alternativas_ep.index', compact('alternativas'));
     }
 
     /**
@@ -36,13 +42,18 @@ class AlternativasEpController extends Controller
             return back()->withErrors($v)->withInput();
         }
 
+        alternativasep::create([
+            'TipoAlternativa' => $request->TipoAlternativa
+        ]);
+
+        return redirect()->route('alternativasEp.create')->with('success', 'Alternativa registrada exitosamente');
 
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $NIS)
     {
         //
     }
@@ -50,7 +61,7 @@ class AlternativasEpController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(int $NIS)
     {
         //
     }
@@ -58,7 +69,7 @@ class AlternativasEpController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $NIS)
     {
         //
     }
@@ -66,8 +77,12 @@ class AlternativasEpController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $NIS)
     {
-        //
+        $alternativas = alternativasep::find($NIS);
+        $alternativas->delete();
+
+        return redirect()->route('alternativasEp.index')
+            ->with('success', 'La alternativa se ha eliminado correctamente');
     }
 }

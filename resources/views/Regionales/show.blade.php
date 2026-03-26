@@ -1,41 +1,47 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Consultar datos de la regional</title>
-</head>
-<body>
+@extends('layouts.diseñoVistas')
+
+@section('title','Detalle de la regional')
 
 @section('content')
 
-    <div class="container">
-        <h2>Detalle de la regional</h2>
+    <div class="card">
 
-        <div class="card">
-            <div class="card-body">
+        <div class="card-body">
 
-                <p><strong>NIS:</strong> {{ $regionales->NIS }}</p>
+            <h3 class="mb-4">Detalle de la regional</h3>
 
-                <p><strong>Código:</strong> {{ $regionales->Codigo }}</p>
-                <p><strong>Denominación:</strong> {{ $regionales->Denominacion }}</p>
-                <p><strong>Observaciones:</strong> {{ $regionales->Observaciones }}</p>
+            <div class="row">
+
+                <div class="col-md-6 mb-2">
+                    <strong>Código:</strong>
+                    {{ $regionales->Codigo }}
+                </div>
+
+                <div class="col-md-6 mb-2">
+                    <strong>Denominación:</strong>
+                    {{ $regionales->Denominacion }}
+                </div>
+
+                <div class="col-md-6 mb-2">
+                    <strong>Observaciones:</strong>
+                    {{ $regionales->Observaciones }}
+                </div>
 
             </div>
+
+            <div class="mt-4">
+
+                <a href="{{ route('regionales.index') }}" class="btn btn-secondary">
+                    Volver
+                </a>
+
+                <a href="{{ route('regionales.edit',$regionales->NIS) }}" class="btn btn-warning">
+                    Editar
+                </a>
+
+            </div>
+
         </div>
-
-        <br>
-
-        <a href="{{ route('regionales.index') }}" class="btn btn-secondary">
-            Volver
-        </a>
-
     </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-</body>
-</html>
+@endsection

@@ -46,12 +46,11 @@ class RegionalesController extends Controller
             return back()->withErrors($v)->withInput();
         }
 
-        $input=$request->all();
-        $input['Codigo']=$input['Codigo'];
-        $input['Denominacion']=$input['Denominacion'];
-        $input['Observaciones']=$input['Observaciones'];
-
-        regionales::create($input);
+        regionales::create([
+            'Codigo' => $request->Codigo,
+            'Denominacion'=>$request->Denominacion,
+            'Observaciones'=>$request->Observaciones
+        ]);
 
         return redirect()->route('regionales.index')->with('success', 'Regional registrada exitosamente');
     }

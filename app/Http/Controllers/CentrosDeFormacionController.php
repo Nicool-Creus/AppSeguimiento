@@ -51,14 +51,13 @@ class CentrosDeFormacionController extends Controller
             return back()->withErrors($v)->withInput();
         }
 
-        $input=$request->all();
-        $input['Codigo']=$input['Codigo'];
-        $input['Denominacion']=$input['Denominacion'];
-        $input['Direccion']=$input['Direccion'];
-        $input['Observaciones']=$input['Observaciones'];
-        $input['tblregionales_NIS']=$input['tblregionales_NIS'];
-
-        centrosdeformacion::create($input);
+        centrosdeformacion::create([
+            'Codigo' => $request->Codigo,
+            'Denominacion' => $request->Denominacion,
+            'Direccion' => $request->Direccion,
+            'Observaciones' => $request->Observaciones,
+            'tblregionales_NIS'=>$request->tblregionales_NIS
+        ]);
 
         return redirect()->route('centroFormacion.create')->with('success', 'Centro registrado exitosamente');
 

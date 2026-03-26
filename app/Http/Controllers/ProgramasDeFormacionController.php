@@ -48,12 +48,11 @@ class ProgramasDeFormacionController extends Controller
             return back()->withErrors($v)->withInput();
         }
 
-        $input=$request->all();
-        $input['Codigo']=$input['Codigo'];
-        $input['Denominacion']=$input['Denominacion'];
-        $input['Observaciones']=$input['Observaciones'];
-
-        programasdeformacion::create($input);
+        programasdeformacion::create([
+            'Codigo' => $request->Codigo,
+            'Denominacion'=>$request->Denominacion,
+            'Observaciones'=>$request->Observaciones
+        ]);
 
         return redirect()->route('programas.create')->with('success', 'Programa registrado exitosamente');
 

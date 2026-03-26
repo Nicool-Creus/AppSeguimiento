@@ -13,6 +13,7 @@ class subtipoalternativa extends Model
     protected $fillable = [
         'NIS', 'SubtipoAlternativa', 'tblalternativasep_NIS'
     ];
+    public $timestamps = false;
 
     public function alternativas()
     {

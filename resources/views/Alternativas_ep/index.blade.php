@@ -1,6 +1,6 @@
 @extends('layouts.diseñoVistas')
 
-@section('title','Programas')
+@section('title','Alternativas de etapa productiva')
 
 @section('content')
 
@@ -14,7 +14,7 @@
 
         <div class="card-body">
 
-            <h3 class="mb-4">Programas</h3>
+            <h3 class="mb-4">Alternativas</h3>
 
             <div class="table-responsive">
 
@@ -22,38 +22,21 @@
 
                     <thead class="table-light">
                     <tr>
-                        <th class="text-center">Código</th>
-                        <th class="text-center">Denominación</th>
-                        <th class="text-center">Observaciones</th>
-                        <th class="text-center">Acciones</th>
+                        <th class="text-center">Tipo de alternativa</th>
                     </tr>
                     </thead>
 
                     <tbody>
 
-                    @forelse($programas as $programa)
+                    @forelse($alternativas as $alternativa)
 
                         <tr>
 
-                            <td>{{$programa->Codigo}}</td>
-
-                            <td>{{$programa->Denominacion}}</td>
-
-                            <td>{{$programa->Observaciones}}</td>
+                            <td>{{$alternativa->TipoAlternativa}}</td>
 
                             <td class="text-center">
 
-                                <a href="{{ route('programas.show', $programa->NIS) }}"
-                                   class="btn btn-primary btn-sm">
-                                    Ver
-                                </a>
-
-                                <a href="{{ route('programas.edit', $programa->NIS) }}"
-                                   class="btn btn-warning btn-sm">
-                                    Actualizar
-                                </a>
-
-                                <form action="{{ route('programas.destroy', $programa->NIS) }}"
+                                <form action="{{ route('alternativasEp.destroy', $alternativa->NIS) }}"
                                       method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
@@ -76,7 +59,7 @@
 
                         <tr>
                             <td colspan="12" class="text-center">
-                                No hay programas registrados
+                                No hay alternativas registradas
                             </td>
                         </tr>
 
@@ -90,9 +73,9 @@
 
             <div class="mt-3">
 
-                <a href="{{ route('programas.create') }}"
+                <a href="{{ route('alternativasEp.create') }}"
                    class="btn btn-success">
-                    Registrar programa
+                    Registrar alternativa
                 </a>
 
                 <a href="{{ route('home') }}"

@@ -52,15 +52,14 @@ class EnteCoformadorController extends Controller
             return back()->withErrors($v)->withInput();
         }
 
-        $input=$request->all();
-        $input['tbltiposdocumentos_NIS']=$input['tbltiposdocumentos_NIS'];
-        $input['NumDoc']=$input['NumDoc'];
-        $input['RazonSocial']=$input['RazonSocial'];
-        $input['Direccion']=bcrypt($input['Direccion']);
-        $input['Telefono']=$input['Telefono'];
-        $input['CorreoInstitucional']=$input['CorreoInstitucional'];
-
-        entecoformador::create($input);
+        entecoformador::create([
+            'tbltiposdocumentos_NIS' => $request->tbltiposdocumentos_NIS,
+            'NumDoc'=>$request->NumDoc,
+            'RazonSocial'=>$request->RazonSocial,
+            'Direccion'=>$request->Direccion,
+            'Telefono'=>$request->Telefono,
+            'CorreoInstitucional'=>$request->CorreoInstitucional
+        ]);
 
         return redirect()->route('enteCoformador.index')->with('success', 'Ente coformador registrado exitosamente');
     }

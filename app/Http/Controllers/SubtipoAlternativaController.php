@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\alternativasep;
+use App\Models\subtipoalternativa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class SubtipoAlternativaController extends Controller
 {
@@ -12,7 +14,10 @@ class SubtipoAlternativaController extends Controller
      */
     public function index()
     {
-        //
+        $subtipoAlternativa = subtipoalternativa::with('alternativas')->get();
+
+        return view('Subtipo_alternativa.index', compact('subtipoAlternativa'));
+
     }
 
     /**
@@ -20,9 +25,9 @@ class SubtipoAlternativaController extends Controller
      */
     public function create()
     {
-        $tblalternativasep_NIS = alternativasep::all();
+        $alternativas = alternativasep::all();
 
-        return view('Alternativas_ep.create', compact('tblalternativasep_NIS'));
+        return view('Subtipo_alternativa.create', compact('alternativas'));
     }
 
     /**
@@ -30,7 +35,23 @@ class SubtipoAlternativaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $v=validator::make($request->all(),[
+            'SubtipoAlternativa'=>['required'],
+            'tblalternativasep_NIS'=>'required|exists:tblalternativasep,NIS',
+
+        ]);
+
+        if ($v->fails()){
+            return back()->withErrors($v)->withInput();
+        }
+
+        subtipoalternativa::create([
+            'SubtipoAlternativa' => $request->SubtipoAlternativa,
+            'tblalternativasep_NIS'=>$request->tblalternativasep_NIS
+        ]);
+
+        return redirect()->route('subtipoAlternativa.create')
+            ->with('success', 'Subtipo registrado exitosamente');
     }
 
     /**
@@ -60,8 +81,19 @@ class SubtipoAlternativaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $NIS)
     {
-        //
+        $subtipoAlternativa = subtipoalternativa::find($NIS);
+
+        if (!$subtipoAlternativa) {
+            return redirect()->route('subtipoAlternativa.index')
+                ->with('error', 'El NIS no existe');
+        }
+
+        $subtipoAlternativa->delete();
+
+        return redirect()->route('subtipoAlternativa.index')
+            ->with('success', 'El subtipo se ha eliminado correctamente');
+
     }
 }

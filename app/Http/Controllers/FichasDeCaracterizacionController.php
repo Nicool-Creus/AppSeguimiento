@@ -58,17 +58,16 @@ class FichasDeCaracterizacionController extends Controller
             return back()->withErrors($v)->withInput();
         }
 
-        $input=$request->all();
-        $input['Codigo']=$input['Codigo'];
-        $input['Denominacion']=$input['Denominacion'];
-        $input['FechaInicio']=$input['FechaInicio'];
-        $input['FechaFin']=$input['FechaFin'];
-        $input['Observaciones']=$input['Observaciones'];
-        $input['tblaprendices_NIS']=$input['tblaprendices_NIS'];
-        $input['tblcentrosdeformacion_NIS']=$input['tblcentrosdeformacion_NIS'];
-        $input['tblprogramasdeformacion_NIS']=$input['tblprogramasdeformacion_NIS'];
-
-        fichasdecaracterizacion::create($input);
+        fichasdecaracterizacion::create([
+            'Codigo' => $request->Codigo,
+            'Denominacion'=>$request->Denominacion,
+            'FechaInicio'=>$request->FechaInicio,
+            'FechaFin'=>$request->FechaFin,
+            'Observaciones'=>$request->Observaciones,
+            'tblaprendices_NIS'=>$request->tblaprendices_NIS,
+            'tblcentrosdeformacion_NIS'=>$request->tblcentrosdeformacion_NIS,
+            'tblprogramasdeformacion_NIS'=>$request->tblprogramasdeformacion_NIS
+        ]);
 
         return redirect()->route('fichasCaracterizacion.create')->with('success', 'Ficha registrada exitosamente');
 

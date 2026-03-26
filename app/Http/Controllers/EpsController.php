@@ -47,12 +47,11 @@ class EpsController extends Controller
             return back()->withErrors($v)->withInput();
         }
 
-        $input=$request->all();
-        $input['NumDoc']=$input['NumDoc'];
-        $input['Denominacion']=$input['Denominacion'];
-        $input['Observaciones']=$input['Observaciones'];
-
-        eps::create($input);
+        eps::create([
+            'NumDoc' => $request->NumDoc,
+            'Denominacion'=>$request->Denominacion,
+            'Observaciones'=>$request->Observaciones
+        ]);
 
         return redirect()->route('eps.index')->with('success', 'eps registrada exitosamente');
 

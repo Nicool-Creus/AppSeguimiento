@@ -55,19 +55,25 @@ class UsuariosController extends Controller
         return view('Usuarios.create_Password_Auxiliar', compact('token'));
     }
 
-    public function guardarContrasena(Request $request)
+    public function guardarContrasena(Request $request, $token)
     {
         $request->validate([
             'Contrasena' => 'required|min:6|confirmed'
         ]);
 
-        $usuario = usuarios::where('TokenContrasena', $request->TokenContrasena)->firstOrFail();
+        $usuario = usuarios::where('TokenContrasena', $token)->first();
 
-        $usuario->Contrasena = Hash::make($request->Contrasena);
-        $usuario->TokenContrasena = null;
-        $usuario->save();
+        if (!$usuario) {
+            return redirect('/login')->with('error', 'Token inválido o expirado');
+        }
 
-        return redirect('/login')->with('success', 'Contraseña creada correctamente');
+        $usuario->update([
+            $usuario->Contrasena = Hash::make($request->Contrasena),
+            $usuario->TokenContrasena = null
+            //$usuario->save();
+        ]);
+
+        return redirect('/app')->with('success', 'Contraseña creada correctamente');
     }
 
     /*public function store(Request $request)

@@ -136,6 +136,10 @@
         <i class="bi bi-file-earmark-text"></i> Crear usuario
     </a>
 
+    <a href="{{ route('usuarios.create') }}">
+        <i class="bi bi-file-earmark-text"></i> Crear auxiliar
+    </a>
+
 </div>
 
 

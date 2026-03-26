@@ -19,7 +19,7 @@
         <tr>
             <th>NIS</th>
             <th>Archivo</th>
-            <th>Fecha subida</th>
+            <th>Fecha de creación</th>
             <th>Estado</th>
         </tr>
         </thead>

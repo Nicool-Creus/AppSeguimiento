@@ -15,7 +15,7 @@
 
 <p>Haz clic en el siguiente enlace para crear tu contraseña:</p>
 
-<a href="{{ url('/crear_contrasena_auxiliar/'.$token) }}">
+<a href="{{ url('/correo_crear_contrasena_auxiliar/'.$token) }}">
     Crear contraseña
 </a>
 

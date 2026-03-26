@@ -16,7 +16,7 @@ Route::get('usuarios/create', [\App\Http\Controllers\UsuariosController::class, 
 Route::post('usuarios', [\App\Http\Controllers\UsuariosController::class, 'store'])->name('usuarios.store');
 
 Route::get('/correo_crear_contrasena_auxiliar/{token}', [\App\Http\Controllers\UsuariosController::class, 'mostrarFormulario']);
-Route::post('/correo_crear_contrasena_auxiliar', [\App\Http\Controllers\UsuariosController::class, 'guardarContrasena']);
+Route::post('/correo_crear_contrasena_auxiliar/{token}', [\App\Http\Controllers\UsuariosController::class, 'guardarContrasena']);
 
 Route::middleware('auth')->group(function () {
     Route::resource('usuarios', \App\Http\Controllers\UsuariosController::class)->except(['create', 'store']);

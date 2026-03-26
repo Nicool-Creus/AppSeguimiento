@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AlternativasEpController extends Controller
 {
@@ -19,7 +20,7 @@ class AlternativasEpController extends Controller
      */
     public function create()
     {
-        //
+        return view('Alternativas_ep.create');
     }
 
     /**
@@ -27,7 +28,15 @@ class AlternativasEpController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $v=validator::make($request->all(),[
+            'TipoAlternativa'=>['required']
+        ]);
+
+        if ($v->fails()){
+            return back()->withErrors($v)->withInput();
+        }
+
+
     }
 
     /**

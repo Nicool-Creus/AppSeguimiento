@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\alternativasep;
 use Illuminate\Http\Request;
 
 class SubtipoAlternativaController extends Controller
@@ -19,7 +20,9 @@ class SubtipoAlternativaController extends Controller
      */
     public function create()
     {
-        //
+        $tblalternativasep_NIS = alternativasep::all();
+
+        return view('Alternativas_ep.create', compact('tblalternativasep_NIS'));
     }
 
     /**

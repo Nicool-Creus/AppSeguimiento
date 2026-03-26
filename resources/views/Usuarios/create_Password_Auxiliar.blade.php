@@ -9,10 +9,18 @@
 </head>
 <body>
 
-<form method="POST" action="/crear_contrasena_auxiliar">
+<form method="POST" action="/correo_crear_contrasena_auxiliar/{{ $token }}">
     @csrf
 
-    <input type="hidden" name="TokenContrasena" value="{{ $token }}">
+    @if ($errors->any())
+        <div style="color:red;">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <label>Contraseña</label>
     <input type="password" name="Contrasena" required>
